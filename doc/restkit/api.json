@@ -1,0 +1,33 @@
+{
+  "currentEnv": "user-app",
+  "envList": [
+    {
+      "env": "user-app",
+      "items": [
+        {
+          "enabled": true,
+          "key": "baseUrl",
+          "value": "http://localhost:9000"
+        }
+      ]
+    }
+  ],
+  "globalHeaderList": [
+    {
+      "enabled": true,
+      "key": "Content-Type",
+      "value": "application/json;charset=UTF-8"
+    },
+    {
+      "enabled": true,
+      "key": "Content-Language",
+      "value": "zh-CN"
+    },
+    {
+      "enabled": true,
+      "key": "Accept",
+      "value": "application/json,  */*"
+    }
+  ],
+  "script": null
+}

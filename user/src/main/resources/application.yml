@@ -1,0 +1,12 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: user-app
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:33060/fusion_user
+    username: fishep
+    password: fishep
+    driver-class-name: com.mysql.cj.jdbc.Driver
