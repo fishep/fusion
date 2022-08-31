@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.time.Instant;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -30,7 +32,8 @@ class UserDaoTest {
         userDO.setName("name");
         userDO.setEmail("name@email.com");
         userDO.setPassword("***");
-        userDO.setCreatedAt(System.currentTimeMillis());
+        userDO.setCreatedAt(Instant.now().getEpochSecond());
+        userDO.setUpdatedAt(Instant.now().getEpochSecond());
 
         Boolean flag = userDao.insert(userDO);
 
@@ -44,7 +47,7 @@ class UserDaoTest {
         userDO.setId(userId);
         userDO.setName("nameupdate");
         userDO.setEmail("nameupdate@email.com");
-        userDO.setUpdatedAt(System.currentTimeMillis());
+        userDO.setUpdatedAt(Instant.now().getEpochSecond());
 
         Boolean flag = userDao.update(userDO);
 
