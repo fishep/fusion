@@ -1,11 +1,9 @@
-package com.fishep.fusion.user.infra.repository.impl;
+package com.fishep.fusion.user.domain.repository;
 
 import com.fishep.fusion.common.type.Email;
 import com.fishep.fusion.user.common.type.UserId;
 import com.fishep.fusion.user.common.type.UserName;
-import com.fishep.fusion.user.common.type.UserPassword;
 import com.fishep.fusion.user.domain.entity.User;
-import com.fishep.fusion.user.domain.repository.UserRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,12 +16,12 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UserRepositoryImplTest {
+class UserRepositoryTest {
+
+    static private User user;
 
     @Autowired
     private UserRepository userRepository;
-
-    static private User user;
 
     @BeforeAll
     static void init() {
@@ -65,6 +63,14 @@ class UserRepositoryImplTest {
     }
 
     @Test
+    @Order(6)
+    void refresh() {
+        User u = userRepository.refresh(user);
+
+        assertEquals(u, user);
+    }
+
+    @Test
     @Order(1)
     void save() {
         Boolean flag = userRepository.save(user);
@@ -72,48 +78,28 @@ class UserRepositoryImplTest {
 
         user.setName(new UserName("name1"));
         user.setEmail(new Email("name1@email.com"));
+        user.setUpdatedAt(Instant.now());
         assertTrue(userRepository.save(user));
     }
 
     @Test
-    @Order(6)
+    @Order(7)
     void isExist() {
         Boolean flag = userRepository.isExist(user);
         assertTrue(flag);
-
-        User u = new User();
-        u.setId(UserId.generator());
-
-        assertThrows(RuntimeException.class, () -> {
-            userRepository.isExist(u);
-        });
     }
 
     @Test
-    @Order(7)
+    @Order(9)
     void isNotExist() {
-        User u = new User();
-        u.setId(UserId.generator());
-        u.setName(new UserName("testisnotexist"));
-        u.setEmail(new Email("testisnotexist@email.com"));
-        u.setPasswordHash("***********");
-        u.setCreatedAt(Instant.now());
-        u.setUpdatedAt(Instant.now());
-
-        Boolean flag = userRepository.isNotExist(u);
+        Boolean flag = userRepository.isNotExist(user);
         assertTrue(flag);
-
-        assertThrows(RuntimeException.class, () -> {
-            userRepository.isNotExist(user);
-        });
     }
 
     @Test
     @Order(8)
     void remove() {
         Boolean flag = userRepository.remove(user);
-
         assertTrue(flag);
     }
-
 }

@@ -6,6 +6,8 @@ import com.fishep.fusion.user.infra.model.UserDO;
 public interface UserBuilder {
     UserDO toDO(User user);
 
+    UserDO toDO(User user, UserDO userDO);
+
     User toEntity(UserDO userDO);
 
     User toEntity(UserDO userDO, User user);

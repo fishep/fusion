@@ -7,9 +7,9 @@ public class HuTool {
     @Test
     void LocalDateTimeOfUTC() {
         long l = System.currentTimeMillis();
-        System.out.println("时间戳：" + l);
+        System.out.println("毫秒时间戳：" + l);
 
         String format = LocalDateTimeUtil.ofUTC(l).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-        System.out.println("UTC：" + format);
+        System.out.println("日期格式：" + format);
     }
 }

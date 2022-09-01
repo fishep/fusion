@@ -14,8 +14,13 @@ import java.time.Instant;
 public class UserBuilderImpl implements UserBuilder {
     @Override
     public UserDO toDO(User user) {
-
         UserDO userDO = new UserDO();
+
+        return this.toDO(user, userDO);
+    }
+
+    @Override
+    public UserDO toDO(User user, UserDO userDO) {
         userDO.setId(user.getId().getValue());
         userDO.setName(user.getName().getValue());
         userDO.setEmail(user.getEmail().getValue());
