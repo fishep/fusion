@@ -6,7 +6,7 @@ import com.fishep.fusion.user.application.service.AuthService;
 import com.fishep.fusion.user.domain.entity.User;
 import com.fishep.fusion.user.domain.message.RegisterSuccess;
 import com.fishep.fusion.user.domain.producer.UserMessageProducer;
-import com.fishep.fusion.user.domain.repository.UserRepository;
+import com.fishep.fusion.user.domain.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,24 +14,20 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserAssembler userAssembler;
+
+    @Autowired
+    private RegisterService registerService;
 
     @Autowired
     private UserMessageProducer userMessageProducer;
-
-    @Autowired
-    private UserAssembler userAssembler;
 
     @Override
     public UserDTO register(String name, String email, String password) {
 
         User user = userAssembler.toEntity(name, email, password);
 
-        userRepository.isNotExist(user);
-
-        userRepository.save(user);
-
-        userRepository.refresh(user);
+        registerService.register(user);
 
         userMessageProducer.send(new RegisterSuccess());
 
