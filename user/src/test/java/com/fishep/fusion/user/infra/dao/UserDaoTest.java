@@ -29,9 +29,9 @@ class UserDaoTest {
 
         userDO = new UserDO();
         userDO.setId(userId);
-        userDO.setName("name");
-        userDO.setEmail("name@email.com");
-        userDO.setPassword("***");
+        userDO.setName("zhangsan");
+        userDO.setEmail("zhangsan@email.com");
+        userDO.setPassword("********");
         userDO.setCreatedAt(Instant.now().getEpochSecond());
         userDO.setUpdatedAt(Instant.now().getEpochSecond());
     }
@@ -61,8 +61,8 @@ class UserDaoTest {
     @Test
     @Order(2)
     void update() {
-        userDO.setName("nameupdate");
-        userDO.setEmail("nameupdate@email.com");
+        userDO.setName("lisi");
+        userDO.setEmail("lisi@email.com");
         userDO.setUpdatedAt(Instant.now().getEpochSecond());
 
         Boolean flag = userDao.update(userDO);
@@ -85,8 +85,8 @@ class UserDaoTest {
     void testSelect() {
         UserDO u = new UserDO();
         u.setId(IdUtil.getSnowflake().nextId());
-        u.setName("no");
-        u.setEmail("no@email.com");
+        u.setName("wangwu");
+        u.setEmail("wangwu@email.com");
         u.setPassword("***");
         u.setCreatedAt(Instant.now().getEpochSecond());
         u.setUpdatedAt(Instant.now().getEpochSecond());

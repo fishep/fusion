@@ -49,19 +49,17 @@ public class UserDaoMybatisImpl implements UserDao {
 
     @Override
     public UserDO select(UserDO user) {
-        UserDO userDO = null;
-
-        if (userDO == null){
-            userDO = userMapper.select(user.getId());
+        if (user.getId() != null){
+            return userMapper.select(user.getId());
         }
-        if (userDO == null){
-            userDO = userMapper.selectByName(user.getName());
+        if (user.getName() != null){
+            return userMapper.selectByName(user.getName());
         }
-        if (userDO == null){
-            userDO = userMapper.selectByEmail(user.getEmail());
+        if (user.getEmail() != null){
+            return userMapper.selectByEmail(user.getEmail());
         }
 
-        return userDO;
+        return null;
     }
 
     @Override

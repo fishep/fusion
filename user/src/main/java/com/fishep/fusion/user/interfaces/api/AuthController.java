@@ -40,6 +40,6 @@ public class AuthController {
 
         UserRegisterResponse vo = userConverter.toVO(userDTO);
 
-        return new Result<>(vo);
+        return new Result<>(201, "user register success!", vo);
     }
 }

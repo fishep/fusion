@@ -22,9 +22,9 @@ class AuthServiceTest {
     @Test
     @Order(1)
     void register() {
-        String name = "name";
-        String email = "name@email.com";
-        String password = "secretpassword";
+        String name = "hello";
+        String email = "hello@email.com";
+        String password = "helloworld";
 
         UserDTO userDTO = authService.register(name, email, password);
 
