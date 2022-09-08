@@ -21,7 +21,7 @@ abstract public class Weapon {
     public Weapon(WeaponId id, String name, Integer damage, DamageType damageType) {
 
         if (!this.haveFeature(damageType)){
-            throw new RuntimeException(this.getName() + " not damage type" + damageType);
+            throw new RuntimeException(this.getClass().getName() + " not damage type" + damageType);
         }
 
         this.id = id;
