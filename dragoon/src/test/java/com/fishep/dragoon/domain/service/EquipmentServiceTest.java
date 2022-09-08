@@ -1,7 +1,6 @@
 package com.fishep.dragoon.domain.service;
 
 import com.fishep.dragoon.domain.entity.*;
-import com.fishep.dragoon.domain.factory.MonsterFactory;
 import com.fishep.dragoon.domain.factory.PlayerFactory;
 import com.fishep.dragoon.domain.factory.WeaponFactory;
 import org.junit.jupiter.api.DisplayName;
@@ -26,9 +25,6 @@ class EquipmentServiceTest {
 
     @Autowired
     WeaponFactory weaponFactory;
-
-    @Autowired
-    MonsterFactory monsterFactory;
 
     @Autowired
     private EquipmentService equipmentService;

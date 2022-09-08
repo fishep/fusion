@@ -33,4 +33,18 @@ abstract public class Player {
         return Boolean.TRUE;
     }
 
+    abstract public Boolean canEquipment(Weapon weapon);
+
+    public Boolean equipment(Weapon weapon){
+
+        Boolean can = this.canEquipment(weapon) && weapon.canEquipment(this);
+
+        if (!can) {
+            throw new RuntimeException("Player Equipment Exception");
+        }
+
+        this.weapon = weapon;
+
+        return Boolean.TRUE;
+    }
 }

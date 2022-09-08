@@ -4,8 +4,12 @@ import com.fishep.dragoon.domain.type.PlayerId;
 
 public class Dragoon extends Player{
 
-    public Dragoon(PlayerId id, String name){
+    public Dragoon(PlayerId id, String name) {
         super(id, name);
     }
 
+    @Override
+    public Boolean canEquipment(Weapon weapon) {
+        return Boolean.TRUE;
+    }
 }

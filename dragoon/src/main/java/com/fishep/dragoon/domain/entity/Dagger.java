@@ -22,4 +22,10 @@ public class Dagger extends Weapon{
 
         return Boolean.FALSE;
     }
+
+    @Override
+    public Boolean canEquipment(Player player) {
+        return player instanceof Fighter || player instanceof Mage;
+    }
+
 }

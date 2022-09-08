@@ -47,4 +47,6 @@ abstract public class Weapon {
     }
 
     abstract protected Boolean haveFeature(DamageType damageType);
+
+    abstract public Boolean canEquipment(Player player);
 }

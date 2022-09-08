@@ -21,4 +21,9 @@ public class Staff extends Weapon{
 
         return Boolean.FALSE;
     }
+
+    @Override
+    public Boolean canEquipment(Player player) {
+        return Boolean.TRUE;
+    }
 }

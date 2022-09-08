@@ -23,4 +23,8 @@ public class Sword extends Weapon{
         return Boolean.FALSE;
     }
 
+    @Override
+    public Boolean canEquipment(Player player) {
+        return Boolean.TRUE;
+    }
 }
