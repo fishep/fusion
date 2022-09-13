@@ -1,5 +1,6 @@
 package com.fishep.fusion.user.interfaces.api;
 
+import com.fishep.fusion.common.annotation.ResultHandler;
 import com.fishep.fusion.common.response.Result;
 import com.fishep.fusion.user.application.dto.UserDTO;
 import com.fishep.fusion.user.application.service.AuthService;
@@ -28,18 +29,21 @@ public class AuthController {
     @Autowired
     private UserConverter userConverter;
 
+    @ResultHandler
     @PostMapping("/register")
     public Result<UserRegisterResponse> register(@RequestBody UserRegisterRequest request) {
 
-        UserDTO userDTO = authService.register(request.getName(), request.getEmail(), request.getPassword());
+        throw new RuntimeException("exception message");
 
-        if (userDTO == null)
-        {
-            return new Result<>(400, "user register fail");
-        }
-
-        UserRegisterResponse vo = userConverter.toVO(userDTO);
-
-        return new Result<>(201, "user register success!", vo);
+//        UserDTO userDTO = authService.register(request.getName(), request.getEmail(), request.getPassword());
+//
+//        if (userDTO == null)
+//        {
+//            return new Result<>(400, "user register fail");
+//        }
+//
+//        UserRegisterResponse vo = userConverter.toVO(userDTO);
+//
+//        return new Result<>(201, "user register success!", vo);
     }
 }
