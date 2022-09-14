@@ -33,17 +33,14 @@ public class AuthController {
     @PostMapping("/register")
     public Result<UserRegisterResponse> register(@RequestBody UserRegisterRequest request) {
 
-        throw new RuntimeException("exception message");
+        UserDTO userDTO = authService.register(request.getName(), request.getEmail(), request.getPassword());
 
-//        UserDTO userDTO = authService.register(request.getName(), request.getEmail(), request.getPassword());
-//
-//        if (userDTO == null)
-//        {
-//            return new Result<>(400, "user register fail");
-//        }
-//
-//        UserRegisterResponse vo = userConverter.toVO(userDTO);
-//
-//        return new Result<>(201, "user register success!", vo);
+        if (userDTO == null) {
+            return new Result<>(400, "user register fail");
+        }
+
+        UserRegisterResponse vo = userConverter.toVO(userDTO);
+
+        return new Result<>(201, "user register success!", vo);
     }
 }
