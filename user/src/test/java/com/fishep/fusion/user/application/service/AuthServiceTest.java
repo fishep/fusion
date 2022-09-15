@@ -1,6 +1,9 @@
 package com.fishep.fusion.user.application.service;
 
+import com.fishep.fusion.user.application.cqe.UserNameLoginCommand;
 import com.fishep.fusion.user.application.dto.UserDTO;
+import com.fishep.fusion.user.application.dto.UserTokenDTO;
+import com.fishep.fusion.user.common.type.UserName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -31,5 +34,21 @@ class AuthServiceTest {
         assertNotNull(userDTO);
         assertEquals(name, userDTO.getName());
         assertEquals(email, userDTO.getEmail());
+    }
+
+    @Test
+    @Order(2)
+    void login() {
+        UserNameLoginCommand loginCommand = new UserNameLoginCommand(new UserName("hello"), "helloworld");
+
+        UserTokenDTO userTokenDTO = authService.login(loginCommand);
+
+        assertNotNull(userTokenDTO);
+
+        loginCommand.setPassword("hhhhhhhh");
+
+        assertThrows(RuntimeException.class, ()->{
+            authService.login(loginCommand);
+        });
     }
 }

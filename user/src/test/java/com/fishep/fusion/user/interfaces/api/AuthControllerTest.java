@@ -22,6 +22,7 @@ import java.util.Map;
 class AuthControllerTest {
 
     private String registerUri = "/api/auth/register";
+    private String loginUri = "/api/auth/login";
 
     @Autowired
     private MockMvc mockMvc;
@@ -53,4 +54,47 @@ class AuthControllerTest {
         response.andDo(MockMvcResultHandlers.print());
     }
 
+    @Test
+    void loginByName() throws Exception {
+
+        Map<String, String> request = new HashMap<>();
+        request.put("identify", "user1");
+//        request.put("identify", "user1@email.com");
+        request.put("password", "123456789");
+        String requestJson = JSONObject.toJSONString(request);
+
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post(loginUri)
+                .content(requestJson)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        ResultActions response = mockMvc.perform(requestBuilder);
+        response.andExpect(MockMvcResultMatchers.status().isOk());
+        response.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.is(200)));
+        response.andExpect(MockMvcResultMatchers.jsonPath("$.data", Matchers.notNullValue()));
+
+        response.andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    void loginByEmail() throws Exception {
+        Map<String, String> request = new HashMap<>();
+        request.put("identify", "user1@email.com");
+        request.put("password", "123456789");
+        String requestJson = JSONObject.toJSONString(request);
+
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post(loginUri)
+                .content(requestJson)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON);
+
+        ResultActions response = mockMvc.perform(requestBuilder);
+        response.andExpect(MockMvcResultMatchers.status().isOk());
+        response.andExpect(MockMvcResultMatchers.jsonPath("$.code", Matchers.is(200)));
+        response.andExpect(MockMvcResultMatchers.jsonPath("$.data", Matchers.notNullValue()));
+
+        response.andDo(MockMvcResultHandlers.print());
+    }
 }

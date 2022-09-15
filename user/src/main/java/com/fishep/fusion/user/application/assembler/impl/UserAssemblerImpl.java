@@ -3,6 +3,7 @@ package com.fishep.fusion.user.application.assembler.impl;
 import com.fishep.fusion.common.type.Email;
 import com.fishep.fusion.user.application.assembler.UserAssembler;
 import com.fishep.fusion.user.application.dto.UserDTO;
+import com.fishep.fusion.user.application.dto.UserTokenDTO;
 import com.fishep.fusion.user.common.type.UserId;
 import com.fishep.fusion.user.common.type.UserName;
 import com.fishep.fusion.user.common.type.UserPassword;
@@ -28,6 +29,19 @@ public class UserAssemblerImpl implements UserAssembler {
         userDTO.setCreatedAt(user.getCreatedAt().getEpochSecond());
         userDTO.setUpdatedAt(user.getUpdatedAt().getEpochSecond());
         return userDTO;
+    }
+
+    @Override
+    public UserTokenDTO toUserTokenDTO(User user, String token) {
+        return this.toUserTokenDTO(new UserTokenDTO(), user, token);
+    }
+
+    @Override
+    public UserTokenDTO toUserTokenDTO(UserTokenDTO userTokenDTO, User user, String token) {
+        userTokenDTO.setUserDTO(this.toDTO(user));
+        userTokenDTO.setToken(token);
+
+        return userTokenDTO;
     }
 
     @Override
