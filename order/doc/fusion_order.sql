@@ -29,7 +29,7 @@ create table `order_products`
     `id` bigint not null comment 'id',
     `order_id` bigint not null comment 'orders.id',
     `currency` char(3) not null comment '币种,例如：USD,CNY',
-    `product_id` char(32) not null comment '产品id',
+    `product_id` bigint not null comment '产品id',
     `product_count` int unsigned not null comment '产品总数',
     `product_price` int unsigned not null comment '产品单价，单位：分',
     `product_amount` int unsigned not null comment '产品总额，单位：分',
