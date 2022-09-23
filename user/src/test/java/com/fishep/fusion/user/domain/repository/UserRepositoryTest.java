@@ -1,8 +1,8 @@
 package com.fishep.fusion.user.domain.repository;
 
 import com.fishep.fusion.common.type.Email;
-import com.fishep.fusion.user.common.type.UserId;
-import com.fishep.fusion.user.common.type.UserName;
+import com.fishep.fusion.common.type.UserId;
+import com.fishep.fusion.common.type.UserName;
 import com.fishep.fusion.user.domain.entity.User;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ class UserRepositoryTest {
     @BeforeAll
     static void init() {
         user = new User();
-        user.setId(UserId.generator());
+        user.setId(new UserId());
         user.setName(new UserName("name"));
         user.setEmail(new Email("name@email.com"));
         user.setPasswordHash("********");

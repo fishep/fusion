@@ -1,8 +1,8 @@
 package com.fishep.fusion.user.infra.converter.impl;
 
 import com.fishep.fusion.common.type.Email;
-import com.fishep.fusion.user.common.type.UserId;
-import com.fishep.fusion.user.common.type.UserName;
+import com.fishep.fusion.common.type.UserId;
+import com.fishep.fusion.common.type.UserName;
 import com.fishep.fusion.user.domain.entity.User;
 import com.fishep.fusion.user.infra.converter.UserBuilder;
 import com.fishep.fusion.user.infra.model.UserDO;

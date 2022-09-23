@@ -12,6 +12,6 @@ class MoneyTest {
         Money money = new Money(new Currency("CNY"), 100);
 
         assertEquals(Currency.Code.CNY, money.getCurrency().getCode());
-        assertEquals(100, money.getAmount());
+        assertEquals(100, money.getValue());
     }
 }

@@ -1,17 +1,20 @@
 package com.fishep.fusion.order.application.cqe;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 public class PlaceOrderCommand {
 
     @Data
-    public class Product {
+    @AllArgsConstructor
+    public static class Product {
         public Long productId;
+        public String productUnit;
         public Integer productCount;
     }
 

@@ -1,0 +1,12 @@
+server:
+  port: 9030
+spring:
+  application:
+    name: finance-app
+  profiles:
+    active: dev
+#  datasource:
+#    url: jdbc:mysql://localhost:33060/fusion_finance
+#    username: fishep
+#    password: fishep
+#    driver-class-name: com.mysql.cj.jdbc.Driver

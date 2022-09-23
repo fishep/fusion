@@ -1,7 +1,7 @@
 package com.fishep.fusion.order.domain.entity;
 
+import com.fishep.fusion.common.type.AccountId;
 import com.fishep.fusion.common.type.Money;
-import com.fishep.fusion.order.common.type.AccountId;
 import lombok.AllArgsConstructor;
 
 import java.time.Instant;
@@ -40,7 +40,9 @@ public class Account {
         return updatedAt;
     }
 
-    public Boolean deduct(Money money){
-        return amount.minus(money);
+    public Boolean deduct(Money money) {
+        amount.minus(money);
+
+        return Boolean.TRUE;
     }
 }

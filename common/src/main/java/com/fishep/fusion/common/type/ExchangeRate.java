@@ -34,7 +34,7 @@ public class ExchangeRate {
             throw new RuntimeException("Inconsistent exchange rate and currency, Money Currency: " + source.getCurrency() + ", Exchange Currency " + this.source);
         }
 
-        BigDecimal amount = BigDecimal.valueOf(source.getAmount());
+        BigDecimal amount = BigDecimal.valueOf(source.getValue());
 
         BigDecimal exchange = amount.multiply(rate);
 

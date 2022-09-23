@@ -1,12 +1,9 @@
 package com.fishep.fusion.order.domain.service;
 
-import com.fishep.fusion.common.type.Currency;
-import com.fishep.fusion.common.type.ExchangeRate;
-import com.fishep.fusion.common.type.Money;
-import com.fishep.fusion.order.common.type.ProductId;
+import com.fishep.fusion.common.type.*;
 import com.fishep.fusion.order.domain.entity.Account;
 import com.fishep.fusion.order.domain.entity.Order;
-import com.fishep.fusion.order.domain.entity.Product;
+import com.fishep.fusion.order.domain.entity.OrderProduct;
 import com.fishep.fusion.order.domain.entity.Stock;
 import com.fishep.fusion.order.domain.service.impl.OrderServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -15,22 +12,22 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderServiceTest {
 
     @Test
     void generate() {
-        Product product1 = new Product(1, new Money("CNY", 2));
-        Product product2 = new Product(2, new Money("CNY", 1));
-        Stock stock1 = new Stock(product1.getId(), 20);
-        Stock stock2 = new Stock(product2.getId(), 10);
+        OrderProduct orderProduct1 = new OrderProduct(new ProductId(), new Quantity(Quantity.Unit.PIECES, 1), new Money("CNY", 2));
+        OrderProduct orderProduct2 = new OrderProduct(new ProductId(), new Quantity(Quantity.Unit.PIECES, 2), new Money("CNY", 1));
+        Stock stock1 = new Stock(orderProduct1.getProductId(), new Quantity(Quantity.Unit.PIECES, 20));
+        Stock stock2 = new Stock(orderProduct2.getProductId(), new Quantity(Quantity.Unit.PIECES, 10));
 
         Account account = new Account(new Money("CNY", 10000));
 
-        Order order = new Order("OD20220922000001", new Currency("CNY"), account);
-        order.addProduct(product1);
-        order.addProduct(product2);
+        Order order = new Order(new Currency("CNY"), account.getId());
+        order.addProduct(orderProduct1);
+        order.addProduct(orderProduct2);
 
         List<Stock> stocks = new ArrayList<>();
         stocks.add(stock1);
@@ -41,10 +38,10 @@ class OrderServiceTest {
         OrderService orderService = new OrderServiceImpl();
         orderService.generate(order, account, exchangeRate, stocks);
 
-        assertEquals(4, order.getAmount().getAmount());
-        assertEquals(9996, account.getAmount().getAmount());
-        assertEquals(19, stock1.getCount());
-        assertEquals(8, stock2.getCount());
+        assertEquals(4, order.getAmount().getValue());
+        assertEquals(9996, account.getAmount().getValue());
+        assertEquals(19, stock1.getCount().getValue());
+        assertEquals(8, stock2.getCount().getValue());
 
     }
 

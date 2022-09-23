@@ -1,7 +1,6 @@
 package com.fishep.fusion.user.interfaces.api;
 
 import com.fishep.fusion.common.annotation.ResultHandler;
-import com.fishep.fusion.common.exception.EmailPatternException;
 import com.fishep.fusion.common.response.Result;
 import com.fishep.fusion.common.type.Email;
 import com.fishep.fusion.user.application.cqe.UserEmailLoginCommand;
@@ -9,7 +8,7 @@ import com.fishep.fusion.user.application.cqe.UserNameLoginCommand;
 import com.fishep.fusion.user.application.dto.UserDTO;
 import com.fishep.fusion.user.application.dto.UserTokenDTO;
 import com.fishep.fusion.user.application.service.AuthService;
-import com.fishep.fusion.user.common.type.UserName;
+import com.fishep.fusion.common.type.UserName;
 import com.fishep.fusion.user.interfaces.converter.UserConverter;
 import com.fishep.fusion.user.interfaces.request.UserLoginRequest;
 import com.fishep.fusion.user.interfaces.request.UserRegisterRequest;

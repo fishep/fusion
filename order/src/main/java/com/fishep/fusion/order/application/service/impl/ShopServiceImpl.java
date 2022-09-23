@@ -1,16 +1,13 @@
 package com.fishep.fusion.order.application.service.impl;
 
-import com.fishep.fusion.common.type.Currency;
-import com.fishep.fusion.common.type.ExchangeRate;
+import com.fishep.fusion.common.type.*;
 import com.fishep.fusion.order.application.assembler.OrderAssembler;
 import com.fishep.fusion.order.application.cqe.PlaceOrderCommand;
 import com.fishep.fusion.order.application.dto.OrderDTO;
 import com.fishep.fusion.order.application.service.ShopService;
-import com.fishep.fusion.order.common.type.AccountId;
-import com.fishep.fusion.order.common.type.ProductId;
 import com.fishep.fusion.order.domain.entity.Account;
 import com.fishep.fusion.order.domain.entity.Order;
-import com.fishep.fusion.order.domain.entity.Product;
+import com.fishep.fusion.order.domain.entity.OrderProduct;
 import com.fishep.fusion.order.domain.entity.Stock;
 import com.fishep.fusion.order.domain.message.OrderCreated;
 import com.fishep.fusion.order.domain.producer.OrderMessageProducer;
@@ -61,26 +58,27 @@ public class ShopServiceImpl implements ShopService {
 
         Currency currency = new Currency(placeOrderCommand.getCurrency());
         AccountId accountId = new AccountId(placeOrderCommand.getAccountId());
-        List<Product> products = new ArrayList<>();
+
+        List<OrderProduct> orderProducts = new ArrayList<>();
         for (PlaceOrderCommand.Product p : placeOrderCommand.getProducts()){
-            Product product = orderAssembler.OrderProductAssembler(new ProductId(p.getProductId()), p.getProductCount(), currency);
-            products.add(product);
+            OrderProduct orderProduct = new OrderProduct(new ProductId(p.getProductId()), new Quantity(p.getProductUnit(), p.getProductCount()), new Money(currency, 0));
+            orderProducts.add(orderProduct);
         }
 
         // 验证账户
         Account account = accountRepository.find(accountId);
 
         // 验证产品
-        productRepository.flush(products);
+        orderProducts = productRepository.flush(orderProducts);
 
         // 验证库存
-        List<Stock> stocks = stockRepository.find(products);
+        List<Stock> stocks = stockRepository.find(orderProducts);
 
         // 兑换服务
         ExchangeRate exchangeRate = exchangeRateService.getExchangeRate(currency, account.getAmount().getCurrency());
 
         // 构建订单
-        Order order = orderRepository.build(currency, products);
+        Order order = new Order(currency, accountId, orderProducts);
 
         // 订单业务
         orderService.generate(order, account, exchangeRate, stocks);

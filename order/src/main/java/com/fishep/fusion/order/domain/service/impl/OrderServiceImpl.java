@@ -4,12 +4,13 @@ import com.fishep.fusion.common.type.ExchangeRate;
 import com.fishep.fusion.common.type.Money;
 import com.fishep.fusion.order.domain.entity.Account;
 import com.fishep.fusion.order.domain.entity.Order;
-import com.fishep.fusion.order.domain.entity.Product;
+import com.fishep.fusion.order.domain.entity.OrderProduct;
 import com.fishep.fusion.order.domain.entity.Stock;
 import com.fishep.fusion.order.domain.service.OrderService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class OrderServiceImpl implements OrderService {
@@ -21,9 +22,9 @@ public class OrderServiceImpl implements OrderService {
 
         account.deduct(money);
 
-        for (Product p : order.getProducts()){
+        for (OrderProduct p : order.getProducts()){
             for (Stock s : stocks){
-                if (s.getProductId().getId() == p.getId().getId()){
+                if (Objects.equals(s.getProductId().getValue(), p.getProductId().getValue())){
                     s.deduct(p.getCount());
                 }
             }

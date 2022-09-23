@@ -1,11 +1,11 @@
 package com.fishep.fusion.order.domain.repository;
 
-import com.fishep.fusion.order.domain.entity.Product;
+import com.fishep.fusion.order.domain.entity.OrderProduct;
 
 import java.util.List;
 
 public interface ProductRepository {
 
-    List<Product> flush(List<Product> products);
+    List<OrderProduct> flush(List<OrderProduct> orderProducts);
 
 }

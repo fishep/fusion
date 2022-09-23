@@ -19,11 +19,11 @@ class ExchangeRateTest {
 
         Money target1 = rate1.exchange(source1);
         assertEquals(Currency.Code.CNY, target1.getCurrency().getCode());
-        assertEquals(10000, target1.getAmount());
+        assertEquals(10000, target1.getValue());
 
         Money target2 = rate2.exchange(source1);
         assertEquals(Currency.Code.USD, target2.getCurrency().getCode());
-        assertEquals(1426, target2.getAmount());
+        assertEquals(1426, target2.getValue());
 
         assertThrows(Exception.class, ()->{
            rate2.exchange(source2);

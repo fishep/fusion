@@ -1,9 +1,6 @@
 package com.fishep.fusion.order.domain.entity;
 
-import com.fishep.fusion.common.type.Currency;
-import com.fishep.fusion.common.type.Money;
-import com.fishep.fusion.order.common.type.OrderId;
-import lombok.AllArgsConstructor;
+import com.fishep.fusion.common.type.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -13,32 +10,58 @@ public class Order {
 
     private OrderId id;
 
-    private Account account;
+    private AccountId accountId;
 
-    private String number;
+    private OrderNumber number;
 
     private Money amount;
 
-    private List<Product> products;
+    private List<OrderProduct> orderProducts;
 
     private Instant createdAt;
 
     private Instant updatedAt;
 
-    public Order(String number, Currency currency, Account account) {
+    public Order(OrderNumber number, Currency currency, AccountId accountId) {
         this.id = new OrderId();
-        this.account = account;
+        this.accountId = accountId;
         this.number = number;
-        this.products = new ArrayList<>();
+        this.orderProducts = new ArrayList<>();
         this.amount = new Money(currency, 0);
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
     }
 
-    public Order(String number, Currency currency, Account account, List<Product> products) {
+    public Order(OrderNumber number, Currency currency, AccountId accountId, List<OrderProduct> orderProducts) {
         this.id = new OrderId();
-        this.account = account;
+        this.accountId = accountId;
         this.number = number;
-        this.products = products;
+        this.orderProducts = orderProducts;
         this.amount = new Money(currency, 0);
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
+
+        this.calculateTotal();
+    }
+
+    public Order(Currency currency, AccountId accountId) {
+        this.id = new OrderId();
+        this.accountId = accountId;
+        this.number = new OrderNumber();
+        this.orderProducts = new ArrayList<>();
+        this.amount = new Money(currency, 0);
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
+    }
+
+    public Order(Currency currency, AccountId accountId, List<OrderProduct> orderProducts) {
+        this.id = new OrderId();
+        this.accountId = accountId;
+        this.number = new OrderNumber();
+        this.orderProducts = orderProducts;
+        this.amount = new Money(currency, 0);
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
 
         this.calculateTotal();
     }
@@ -47,11 +70,11 @@ public class Order {
         return id;
     }
 
-    public Account getAccount() {
-        return account;
+    public AccountId getAccountId() {
+        return accountId;
     }
 
-    public String getNumber() {
+    public OrderNumber getNumber() {
         return number;
     }
 
@@ -59,8 +82,8 @@ public class Order {
         return amount;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<OrderProduct> getProducts() {
+        return orderProducts;
     }
 
     public Instant getCreatedAt() {
@@ -72,17 +95,17 @@ public class Order {
     }
 
     public Money calculateTotal() {
-        amount.setAmount(0);
+        amount.setValue(0);
 
-        for (Product p : products) {
+        for (OrderProduct p : orderProducts) {
             amount.plus(p.totalPrice());
         }
 
         return amount;
     }
 
-    public Boolean addProduct(Product product) {
-        products.add(product);
+    public Boolean addProduct(OrderProduct orderProduct) {
+        orderProducts.add(orderProduct);
 
         this.calculateTotal();
 

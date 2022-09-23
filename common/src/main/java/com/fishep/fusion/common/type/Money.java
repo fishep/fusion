@@ -4,47 +4,47 @@ public class Money {
 
     private Currency currency;
 
-    private Integer amount; // 单位：分
+    private Integer value; // 单位：分
 
-    public Money(Currency currency, Integer amount) {
+    public Money(Currency currency, Integer value) {
         this.currency = currency;
-        this.amount = amount;
+        this.value = value;
     }
 
-    public Money(String code, Integer amount) {
+    public Money(String code, Integer value) {
         this.currency = new Currency(code);
-        this.amount = amount;
+        this.value = value;
     }
 
     public Currency getCurrency() {
         return currency;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public Integer getValue() {
+        return value;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setValue(Integer value) {
+        this.value = value;
     }
 
-    public Boolean plus(Money money){
+    public Money plus(Money money){
         if (currency.getCode() != money.getCurrency().getCode()){
             throw new RuntimeException("Different currencies cannot be added, currency: " + currency + ", plus currency: " + money.getCurrency());
         }
 
-        amount += money.getAmount();
+        value += money.getValue();
 
-        return Boolean.TRUE;
+        return this;
     }
 
-    public Boolean minus(Money money){
+    public Money minus(Money money){
         if (currency.getCode() != money.getCurrency().getCode()){
             throw new RuntimeException("Different currencies cannot be subtracted, currency: " + currency + ", minus currency: " + money.getCurrency());
         }
 
-        amount -= money.getAmount();
+        value -= money.getValue();
 
-        return Boolean.TRUE;
+        return this;
     }
 }

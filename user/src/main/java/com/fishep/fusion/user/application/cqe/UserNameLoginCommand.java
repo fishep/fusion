@@ -1,6 +1,6 @@
 package com.fishep.fusion.user.application.cqe;
 
-import com.fishep.fusion.user.common.type.UserName;
+import com.fishep.fusion.common.type.UserName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -14,6 +14,8 @@
         <module>dragoon</module>
         <module>order</module>
         <module>finance</module>
+        <module>stock</module>
+        <module>product</module>
     </modules>
 
     <properties>

@@ -1,7 +1,8 @@
 package com.fishep.fusion.order.domain.entity;
 
 import com.fishep.fusion.common.type.Money;
-import com.fishep.fusion.order.common.type.ProductId;
+import com.fishep.fusion.common.type.ProductId;
+import com.fishep.fusion.common.type.ProductName;
 import lombok.AllArgsConstructor;
 
 import java.time.Instant;
@@ -11,7 +12,7 @@ public class Product {
 
     private ProductId id;
 
-    private Integer count;
+    private ProductName name;
 
     private Money price;
 
@@ -19,17 +20,9 @@ public class Product {
 
     private Instant updatedAt;
 
-    public Product(Integer count, Money price) {
+    public Product(ProductName name, Money price) {
         this.id = new ProductId();
-        this.count = count;
-        this.price = price;
-        this.createdAt = Instant.now();
-        this.updatedAt = Instant.now();
-    }
-
-    public Product(ProductId id, Integer count, Money price) {
-        this.id = id;
-        this.count = count;
+        this.name = name;
         this.price = price;
         this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
@@ -39,8 +32,8 @@ public class Product {
         return id;
     }
 
-    public Integer getCount() {
-        return count;
+    public ProductName getName() {
+        return name;
     }
 
     public Money getPrice() {
@@ -54,13 +47,4 @@ public class Product {
     public Instant getUpdatedAt() {
         return updatedAt;
     }
-
-    public void setCount(Integer count) {
-        this.count = count;
-    }
-
-    public Money totalPrice(){
-        return new Money(price.getCurrency(), price.getAmount() * count);
-    }
-
 }

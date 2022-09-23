@@ -3,7 +3,7 @@ package com.fishep.fusion.user.application.service;
 import com.fishep.fusion.user.application.cqe.UserNameLoginCommand;
 import com.fishep.fusion.user.application.dto.UserDTO;
 import com.fishep.fusion.user.application.dto.UserTokenDTO;
-import com.fishep.fusion.user.common.type.UserName;
+import com.fishep.fusion.common.type.UserName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;

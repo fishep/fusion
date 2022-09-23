@@ -1,8 +1,8 @@
 package com.fishep.fusion.user.domain.service;
 
 import com.fishep.fusion.common.type.Email;
-import com.fishep.fusion.user.common.type.UserId;
-import com.fishep.fusion.user.common.type.UserName;
+import com.fishep.fusion.common.type.UserId;
+import com.fishep.fusion.common.type.UserName;
 import com.fishep.fusion.user.domain.entity.User;
 import com.fishep.fusion.user.domain.extend.HashService;
 import org.junit.jupiter.api.*;
@@ -38,7 +38,7 @@ class UserServiceTest {
     @Test
     @Order(1)
     void register() {
-        user.setId(UserId.generator());
+        user.setId(new UserId());
         user.setName(new UserName("testname"));
         user.setEmail(new Email("testname@email.com"));
         user.setPasswordHash(hashService.hash(password));

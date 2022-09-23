@@ -1,7 +1,8 @@
 package com.fishep.fusion.order.domain.entity;
 
-import com.fishep.fusion.order.common.type.ProductId;
-import com.fishep.fusion.order.common.type.StockId;
+import com.fishep.fusion.common.type.ProductId;
+import com.fishep.fusion.common.type.Quantity;
+import com.fishep.fusion.common.type.StockId;
 import lombok.AllArgsConstructor;
 
 import java.time.Instant;
@@ -13,13 +14,13 @@ public class Stock {
 
     private ProductId productId;
 
-    private Integer count;
+    private Quantity count;
 
     private Instant createdAt;
 
     private Instant updatedAt;
 
-    public Stock(ProductId productId, Integer count) {
+    public Stock(ProductId productId, Quantity count) {
         this.id = new StockId();
         this.productId = productId;
         this.count = count;
@@ -27,7 +28,7 @@ public class Stock {
         this.updatedAt = Instant.now();
     }
 
-    public Stock(StockId id, ProductId productId, Integer count) {
+    public Stock(StockId id, ProductId productId, Quantity count) {
         this.id = id;
         this.productId = productId;
         this.count = count;
@@ -43,16 +44,16 @@ public class Stock {
         return productId;
     }
 
-    public Integer getCount() {
+    public Quantity getCount() {
         return count;
     }
 
-    public Boolean deduct(Integer num) {
-        if (num > count) {
+    public Boolean deduct(Quantity num) {
+        if (count.lt(num)) {
             throw new RuntimeException("stock is not enough, count: " + count + ", need: " + num);
         }
 
-        count -= num;
+        count.minus(num);
 
         return Boolean.TRUE;
     }

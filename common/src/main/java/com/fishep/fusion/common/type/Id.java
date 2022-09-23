@@ -8,14 +8,10 @@ import lombok.Data;
 @AllArgsConstructor
 public class Id {
 
-    protected Long id;
+    protected Long value;
 
     public Id() {
         this(IdUtil.getSnowflakeNextId());
-    }
-
-    static public Id generator() {
-        return new Id(IdUtil.getSnowflakeNextId());
     }
 
 }
