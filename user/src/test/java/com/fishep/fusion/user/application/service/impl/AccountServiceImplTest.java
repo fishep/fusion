@@ -1,0 +1,34 @@
+package com.fishep.fusion.user.application.service.impl;
+
+import com.fishep.fusion.user.application.cqe.AccountQueryCommand;
+import com.fishep.fusion.user.application.dto.AccountDTO;
+import com.fishep.fusion.user.application.service.AccountService;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@ActiveProfiles("test")
+class AccountServiceImplTest {
+
+    @Autowired
+    AccountService accountService;
+
+    @Test
+    void query() {
+
+        AccountQueryCommand command = new AccountQueryCommand(1572870916451594444L);
+
+        AccountDTO accountDTO = accountService.query(command);
+
+        assertNotNull(accountDTO);
+
+        assertThrows(Exception.class, ()->{
+            accountService.query(new AccountQueryCommand(1L));
+        });
+
+    }
+}
