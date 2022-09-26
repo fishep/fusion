@@ -28,8 +28,8 @@ class ShopServiceIntegrationTest {
     @MockBean
     AccountRepository accountRepository;
 
-    @MockBean
-    OrderRepository orderRepository;
+//    @MockBean
+//    OrderRepository orderRepository;
 
     @MockBean
     ProductRepository productRepository;
@@ -80,10 +80,10 @@ class ShopServiceIntegrationTest {
         assertEquals(Boolean.TRUE, accountRepository.save(account));
         verify(accountRepository).save(account);
 
-        when(orderRepository.save(any(Order.class))).thenReturn(Boolean.TRUE);
-        Order order = new Order(new Currency("CNY"), account.getId());
-        assertTrue(orderRepository.save(order));
-        verify(orderRepository).save(order);
+//        when(orderRepository.save(any(Order.class))).thenReturn(Boolean.TRUE);
+//        Order order = new Order(new Currency("CNY"), account.getId());
+//        assertTrue(orderRepository.save(order));
+//        verify(orderRepository).save(order);
 
         when(productRepository.flush(any(List.class))).thenReturn(orderProducts);
         assertNotNull(productRepository.flush(orderProducts));

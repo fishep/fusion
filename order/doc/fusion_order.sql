@@ -12,7 +12,7 @@ drop table if exists orders;
 create table `orders`
 (
     `id` bigint not null comment 'id',
-    `account_id` char(32) not null comment 'accounts.uuid',
+    `account_id` bigint not null comment 'accounts.id',
     `number` char(16) not null comment '订单编号',
     `currency` char(3) not null comment '订单币种,例如：USD,CNY',
     `amount` int unsigned not null comment '订单金额，单位：分',

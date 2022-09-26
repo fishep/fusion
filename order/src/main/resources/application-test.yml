@@ -3,8 +3,6 @@ server:
 spring:
   application:
     name: order-app
-  profiles:
-    active: test
   datasource:
     url: jdbc:mysql://localhost:33060/fusion_order
     username: fishep
