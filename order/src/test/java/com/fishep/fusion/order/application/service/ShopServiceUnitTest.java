@@ -71,12 +71,12 @@ class ShopServiceUnitTest {
         Account account = new Account(new Money("CNY", 100));
 
         List<Stock> stocks = new ArrayList<>();
-        stocks.add(new Stock(product1.getId(), new Quantity(Quantity.Unit.PCS, 10)));
-        stocks.add(new Stock(product2.getId(), new Quantity(Quantity.Unit.PCS, 20)));
+        stocks.add(new Stock(product1.getId(), new Quantity(Unit.PCS, 10)));
+        stocks.add(new Stock(product2.getId(), new Quantity(Unit.PCS, 20)));
 
         List<OrderProduct> orderProducts = new ArrayList<>();
-        orderProducts.add(new OrderProduct(product1.getId(), new Quantity(Quantity.Unit.PCS, 1), product1.getPrice()));
-        orderProducts.add(new OrderProduct(product2.getId(), new Quantity(Quantity.Unit.PCS, 2), product2.getPrice()));
+        orderProducts.add(new OrderProduct(product1.getId(), new Quantity(Unit.PCS, 1), product1.getPrice()));
+        orderProducts.add(new OrderProduct(product2.getId(), new Quantity(Unit.PCS, 2), product2.getPrice()));
 
         ExchangeRate exchangeRate = new ExchangeRate(cny, cny, BigDecimal.ONE);
 

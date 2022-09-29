@@ -32,6 +32,15 @@ public class OrderProduct {
         this.updatedAt = Instant.now();
     }
 
+    public OrderProduct(ProductId productId, Quantity count) {
+        this.id = new OrderProductId();
+        this.productId = productId;
+        this.count = count;
+//        this.price = price;
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
+    }
+
     public OrderProductId getId() {
         return id;
     }
@@ -46,6 +55,10 @@ public class OrderProduct {
 
     public Money getPrice() {
         return price;
+    }
+
+    public void setPrice(Money price) {
+        this.price = price;
     }
 
     public Instant getCreatedAt() {
@@ -64,4 +77,14 @@ public class OrderProduct {
         return new Money(price.getCurrency(), price.getValue() * count.getValue());
     }
 
+    public Boolean changePrice(Money price) {
+        if (this.price == null){
+            this.setPrice(price);
+            return Boolean.TRUE;
+        }
+
+        this.price.assign(price);
+
+        return Boolean.TRUE;
+    }
 }

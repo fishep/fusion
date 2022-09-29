@@ -1,5 +1,5 @@
 {
-  "currentEnv": "user-app",
+  "currentEnv": "stock-app",
   "envList": [
     {
       "env": "user-app",
@@ -8,6 +8,26 @@
           "enabled": true,
           "key": "baseUrl",
           "value": "http://localhost:9010"
+        }
+      ]
+    },
+    {
+      "env": "product-app",
+      "items": [
+        {
+          "enabled": true,
+          "key": "baseUrl",
+          "value": "http://localhost:9050"
+        }
+      ]
+    },
+    {
+      "env": "stock-app",
+      "items": [
+        {
+          "enabled": true,
+          "key": "baseUrl",
+          "value": "http://localhost:9040"
         }
       ]
     }

@@ -28,6 +28,14 @@ public class Product {
         this.updatedAt = Instant.now();
     }
 
+    public Product(ProductId id, ProductName name, Money price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
+    }
+
     public ProductId getId() {
         return id;
     }

@@ -18,10 +18,10 @@ class OrderServiceTest {
 
     @Test
     void generate() {
-        OrderProduct orderProduct1 = new OrderProduct(new ProductId(), new Quantity(Quantity.Unit.PIECES, 1), new Money("CNY", 2));
-        OrderProduct orderProduct2 = new OrderProduct(new ProductId(), new Quantity(Quantity.Unit.PIECES, 2), new Money("CNY", 1));
-        Stock stock1 = new Stock(orderProduct1.getProductId(), new Quantity(Quantity.Unit.PIECES, 20));
-        Stock stock2 = new Stock(orderProduct2.getProductId(), new Quantity(Quantity.Unit.PIECES, 10));
+        OrderProduct orderProduct1 = new OrderProduct(new ProductId(), new Quantity(Unit.PIECES, 1), new Money("CNY", 2));
+        OrderProduct orderProduct2 = new OrderProduct(new ProductId(), new Quantity(Unit.PIECES, 2), new Money("CNY", 1));
+        Stock stock1 = new Stock(orderProduct1.getProductId(), new Quantity(Unit.PIECES, 20));
+        Stock stock2 = new Stock(orderProduct2.getProductId(), new Quantity(Unit.PIECES, 10));
 
         Account account = new Account(new Money("CNY", 10000));
 

@@ -3,10 +3,11 @@ package com.fishep.fusion.order.application.service;
 import com.fishep.fusion.common.type.*;
 import com.fishep.fusion.order.application.cqe.PlaceOrderCommand;
 import com.fishep.fusion.order.application.dto.OrderDTO;
-import com.fishep.fusion.order.domain.entity.*;
+import com.fishep.fusion.order.domain.entity.Account;
+import com.fishep.fusion.order.domain.entity.OrderProduct;
+import com.fishep.fusion.order.domain.entity.Product;
+import com.fishep.fusion.order.domain.entity.Stock;
 import com.fishep.fusion.order.domain.producer.OrderMessageProducer;
-import com.fishep.fusion.order.domain.repository.AccountRepository;
-import com.fishep.fusion.order.domain.repository.OrderRepository;
 import com.fishep.fusion.order.domain.repository.ProductRepository;
 import com.fishep.fusion.order.domain.repository.StockRepository;
 import com.fishep.fusion.order.domain.service.ExchangeRateService;
@@ -31,11 +32,11 @@ class ShopServiceIntegrationTest {
 //    @MockBean
 //    OrderRepository orderRepository;
 
-    @MockBean
-    ProductRepository productRepository;
+//    @MockBean
+//    ProductRepository productRepository;
 
-    @MockBean
-    StockRepository stockRepository;
+//    @MockBean
+//    StockRepository stockRepository;
 
     @MockBean
     ExchangeRateService exchangeRateService;
@@ -52,22 +53,24 @@ class ShopServiceIntegrationTest {
         Currency cny = new Currency("CNY");
         Currency usd = new Currency("USD");
 
-        Product product1 = new Product(new ProductName("光模块1", Lang.zh_CN), new Money("CNY", 1));
-        Product product2 = new Product(new ProductName("光模块2", Lang.zh_CN), new Money("CNY", 2));
+//        Product product1 = new Product(new ProductName("光模块1", Lang.zh_CN), new Money("CNY", 1));
+//        Product product2 = new Product(new ProductName("光模块2", Lang.zh_CN), new Money("CNY", 2));
+        Product product1 = new Product(new ProductId(1570262577389624911L), new ProductName("光模块1", Lang.zh_CN), new Money("CNY", 1));
+        Product product2 = new Product(new ProductId(1570262577389624922L), new ProductName("光模块2", Lang.zh_CN), new Money("CNY", 2));
         Product product3 = new Product(new ProductName("SFP3", Lang.en_US), new Money("USD", 1426));
 
 //        Account account = new Account(new Money("CNY", 100));
         Account account = new Account(new AccountId(1572870916451594444L), new Money("CNY", 0));
 
         List<Stock> stocks = new ArrayList<>();
-        Stock stock1 = new Stock(product1.getId(), new Quantity(Quantity.Unit.PCS, 10));
-        Stock stock2 = new Stock(product2.getId(), new Quantity(Quantity.Unit.PCS, 20));
+        Stock stock1 = new Stock(product1.getId(), new Quantity(Unit.PCS, 10));
+        Stock stock2 = new Stock(product2.getId(), new Quantity(Unit.PCS, 20));
         stocks.add(stock1);
         stocks.add(stock2);
 
         List<OrderProduct> orderProducts = new ArrayList<>();
-        orderProducts.add(new OrderProduct(product1.getId(), new Quantity(Quantity.Unit.PCS, 1), product1.getPrice()));
-        orderProducts.add(new OrderProduct(product2.getId(), new Quantity(Quantity.Unit.PCS, 2), product2.getPrice()));
+        orderProducts.add(new OrderProduct(product1.getId(), new Quantity(Unit.PCS, 1), product1.getPrice()));
+        orderProducts.add(new OrderProduct(product2.getId(), new Quantity(Unit.PCS, 2), product2.getPrice()));
 
         ExchangeRate exchangeRate = new ExchangeRate(cny, cny, BigDecimal.ONE);
 
@@ -86,17 +89,17 @@ class ShopServiceIntegrationTest {
 //        assertTrue(orderRepository.save(order));
 //        verify(orderRepository).save(order);
 
-        when(productRepository.flush(any(List.class))).thenReturn(orderProducts);
-        assertNotNull(productRepository.flush(orderProducts));
-        verify(productRepository).flush(orderProducts);
+//        when(productRepository.flush(any(List.class))).thenReturn(orderProducts);
+//        assertNotNull(productRepository.flush(orderProducts));
+//        verify(productRepository).flush(orderProducts);
 
-        when(stockRepository.find(any(List.class))).thenReturn(stocks);
-        assertNotNull(stockRepository.find(orderProducts));
-        verify(stockRepository).find(orderProducts);
-
-        when(stockRepository.save(any(List.class))).thenReturn(Boolean.TRUE);
-        assertTrue(stockRepository.save(stocks));
-        verify(stockRepository).save(stocks);
+//        when(stockRepository.find(any(List.class))).thenReturn(stocks);
+//        assertNotNull(stockRepository.find(orderProducts));
+//        verify(stockRepository).find(orderProducts);
+//
+//        when(stockRepository.save(any(List.class))).thenReturn(Boolean.TRUE);
+//        assertTrue(stockRepository.save(stocks));
+//        verify(stockRepository).save(stocks);
 
         when(exchangeRateService.getExchangeRate(any(Currency.class), any(Currency.class))).thenReturn(exchangeRate);
         assertNotNull(exchangeRateService.getExchangeRate(cny, cny));
@@ -117,7 +120,7 @@ class ShopServiceIntegrationTest {
         assertNotNull(orderDTO);
         assertEquals(5, orderDTO.getAmount().getValue());
 //        assertEquals(95, account.getAmount().getValue());
-        assertEquals(9, stock1.getCount().getValue());
-        assertEquals(18, stock2.getCount().getValue());
+//        assertEquals(9, stock1.getCount().getValue());
+//        assertEquals(18, stock2.getCount().getValue());
     }
 }

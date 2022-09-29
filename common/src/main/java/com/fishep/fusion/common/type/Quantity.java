@@ -5,10 +5,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class Quantity {
 
-    public enum Unit {
-        PCS, PIECES, BOX, METER, CENTIMETER
-    }
-
     private Unit unit;
 
     private Integer value;

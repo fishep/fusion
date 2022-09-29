@@ -47,4 +47,15 @@ public class Money {
 
         return this;
     }
+
+    public Money assign(Money money){
+        if (currency.getCode() != money.getCurrency().getCode()){
+            throw new RuntimeException("Different currencies cannot be assign, currency: " + currency + ", minus currency: " + money.getCurrency());
+        }
+
+        value = money.getValue();
+
+        return this;
+    }
+
 }
