@@ -7,4 +7,6 @@ public interface AccountBuilder {
 
     Account toAccount(AccountDO accountDO);
 
+    AccountDO toAccountDO(Account account);
+
 }

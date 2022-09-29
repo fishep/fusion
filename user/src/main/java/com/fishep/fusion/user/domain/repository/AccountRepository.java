@@ -7,4 +7,6 @@ public interface AccountRepository {
 
     Account find(AccountId id);
 
+    Boolean save(Account account);
+
 }

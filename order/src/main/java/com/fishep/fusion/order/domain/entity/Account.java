@@ -24,6 +24,13 @@ public class Account {
         this.updatedAt = Instant.now();
     }
 
+    public Account(AccountId id, Money amount) {
+        this.id = id;
+        this.amount = amount;
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
+    }
+
     public AccountId getId() {
         return id;
     }

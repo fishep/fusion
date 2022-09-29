@@ -25,8 +25,8 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class ShopServiceIntegrationTest {
 
-    @MockBean
-    AccountRepository accountRepository;
+//    @MockBean
+//    AccountRepository accountRepository;
 
 //    @MockBean
 //    OrderRepository orderRepository;
@@ -56,7 +56,8 @@ class ShopServiceIntegrationTest {
         Product product2 = new Product(new ProductName("光模块2", Lang.zh_CN), new Money("CNY", 2));
         Product product3 = new Product(new ProductName("SFP3", Lang.en_US), new Money("USD", 1426));
 
-        Account account = new Account(new Money("CNY", 100));
+//        Account account = new Account(new Money("CNY", 100));
+        Account account = new Account(new AccountId(1572870916451594444L), new Money("CNY", 0));
 
         List<Stock> stocks = new ArrayList<>();
         Stock stock1 = new Stock(product1.getId(), new Quantity(Quantity.Unit.PCS, 10));
@@ -72,13 +73,13 @@ class ShopServiceIntegrationTest {
 
         // -------------------------------------------------------------------------------------------------------------
 
-        when(accountRepository.find(any(AccountId.class))).thenReturn(account);
-        assertEquals(account, accountRepository.find(account.getId()));
-        verify(accountRepository).find(account.getId());
-
-        when(accountRepository.save(any(Account.class))).thenReturn(Boolean.TRUE);
-        assertEquals(Boolean.TRUE, accountRepository.save(account));
-        verify(accountRepository).save(account);
+//        when(accountRepository.find(any(AccountId.class))).thenReturn(account);
+//        assertEquals(account, accountRepository.find(account.getId()));
+//        verify(accountRepository).find(account.getId());
+//
+//        when(accountRepository.save(any(Account.class))).thenReturn(Boolean.TRUE);
+//        assertEquals(Boolean.TRUE, accountRepository.save(account));
+//        verify(accountRepository).save(account);
 
 //        when(orderRepository.save(any(Order.class))).thenReturn(Boolean.TRUE);
 //        Order order = new Order(new Currency("CNY"), account.getId());
@@ -115,7 +116,7 @@ class ShopServiceIntegrationTest {
 
         assertNotNull(orderDTO);
         assertEquals(5, orderDTO.getAmount().getValue());
-        assertEquals(95, account.getAmount().getValue());
+//        assertEquals(95, account.getAmount().getValue());
         assertEquals(9, stock1.getCount().getValue());
         assertEquals(18, stock2.getCount().getValue());
     }

@@ -16,4 +16,14 @@ public class AccountDaoMybatisImpl implements AccountDao {
     public AccountDO select(Long id) {
         return accountMapper.select(id);
     }
+
+    @Override
+    public Boolean insert(AccountDO accountDO) {
+        return accountMapper.insert(accountDO);
+    }
+
+    @Override
+    public Boolean update(AccountDO accountDO) {
+        return accountMapper.update(accountDO);
+    }
 }

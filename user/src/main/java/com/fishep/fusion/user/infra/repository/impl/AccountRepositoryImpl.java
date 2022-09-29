@@ -22,13 +22,31 @@ public class AccountRepositoryImpl implements AccountRepository {
     public Account find(AccountId id) {
 
         AccountDO accountDO = accountDao.select(id.getValue());
-        if (accountDO == null)
-        {
+        if (accountDO == null) {
             throw new RuntimeException("账户不存在, id: " + id);
         }
 
         Account account = accountBuilder.toAccount(accountDO);
 
         return account;
+    }
+
+    @Override
+    public Boolean save(Account account) {
+
+        AccountDO accountDO = accountBuilder.toAccountDO(account);
+
+        AccountDO ret = accountDao.select(accountDO.getId());
+        if (ret == null) {
+            if (!accountDao.insert(accountDO)) {
+                throw new RuntimeException("insert fail, " + account);
+            }
+        } else {
+            if (!accountDao.update(accountDO)) {
+                throw new RuntimeException("update fail, " + account);
+            }
+        }
+
+        return Boolean.TRUE;
     }
 }

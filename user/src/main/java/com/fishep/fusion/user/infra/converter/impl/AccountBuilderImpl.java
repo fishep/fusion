@@ -29,4 +29,21 @@ public class AccountBuilderImpl implements AccountBuilder {
 
         return account;
     }
+
+    @Override
+    public AccountDO toAccountDO(Account account) {
+
+        AccountDO accountDO = new AccountDO();
+        accountDO.setId(account.getId().getValue());
+        accountDO.setNumber(account.getNumber().getValue());
+        accountDO.setUserId(account.getUserId().getValue());
+        accountDO.setName(account.getName());
+        accountDO.setCurrency(account.getAmount().getCurrency().getCodeName());
+        accountDO.setAmount(account.getAmount().getValue());
+        accountDO.setQuota(account.getQuota().getValue());
+        accountDO.setCreatedAt(account.getCreatedAt().getEpochSecond());
+        accountDO.setUpdatedAt(account.getUpdatedAt().getEpochSecond());
+
+        return accountDO;
+    }
 }

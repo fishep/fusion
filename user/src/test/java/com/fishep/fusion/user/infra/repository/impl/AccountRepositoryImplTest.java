@@ -1,6 +1,8 @@
 package com.fishep.fusion.user.infra.repository.impl;
 
 import com.fishep.fusion.common.type.AccountId;
+import com.fishep.fusion.common.type.Money;
+import com.fishep.fusion.common.type.UserId;
 import com.fishep.fusion.user.domain.entity.Account;
 import com.fishep.fusion.user.domain.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
@@ -26,8 +28,19 @@ class AccountRepositoryImplTest {
 
         assertNotNull(account);
 
-        assertThrows(Exception.class, ()->{
+        assertThrows(Exception.class, () -> {
             accountRepository.find(new AccountId(1L));
         });
+    }
+
+    @Test
+    void save() {
+        Account account = new Account(new UserId(1572870916451598336L), new Money("CNY", 100));
+
+        assertTrue(accountRepository.save(account));
+
+        account.deduct(new Money("CNY", 10));
+
+        assertTrue(accountRepository.save(account));
     }
 }

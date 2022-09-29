@@ -6,4 +6,8 @@ public interface AccountDao {
 
     AccountDO select(Long id);
 
+    Boolean insert(AccountDO accountDO);
+
+    Boolean update(AccountDO accountDO);
+
 }
