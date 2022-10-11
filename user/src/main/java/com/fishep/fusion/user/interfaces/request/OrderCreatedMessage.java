@@ -1,4 +1,4 @@
-package com.fishep.fusion.order.domain.message;
+package com.fishep.fusion.user.interfaces.request;
 
 import com.fishep.fusion.common.type.AccountId;
 import com.fishep.fusion.common.type.OrderNumber;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderCreated {
+public class OrderCreatedMessage {
 
     private AccountId accountId;
 

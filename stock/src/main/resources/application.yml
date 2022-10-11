@@ -5,8 +5,3 @@ spring:
     name: stock-app
   profiles:
     active: dev
-  datasource:
-    url: jdbc:mysql://localhost:33060/fusion_stock
-    username: fishep
-    password: fishep
-    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -89,7 +89,7 @@ public class ShopServiceImpl implements ShopService {
         stockRepository.save(stocks);
 
         // 分发创建订单事件
-        orderMessageProducer.send(new OrderCreated());
+        orderMessageProducer.send(new OrderCreated(account.getId(), order.getNumber()));
 
         // 对象转换
         OrderDTO orderDTO = orderAssembler.toDTO(order);

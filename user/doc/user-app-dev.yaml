@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:33060/fusion_user
+    username: fishep
+    password: fishep
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 63790
+    password:
+    ssl: false
+    database: 0
