@@ -2,7 +2,7 @@ package com.fishep.fusion.order.infra.converter.impl;
 
 import com.fishep.fusion.order.domain.entity.Order;
 import com.fishep.fusion.order.domain.entity.OrderProduct;
-import com.fishep.fusion.order.infra.converter.OrderConverter;
+import com.fishep.fusion.order.infra.converter.OrderBuilder;
 import com.fishep.fusion.order.infra.model.OrderDO;
 import com.fishep.fusion.order.infra.model.OrderProductDO;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class OrderConverterImpl implements OrderConverter {
+public class OrderBuilderImpl implements OrderBuilder {
 
     @Override
     public OrderDO toOrderDO(Order order) {

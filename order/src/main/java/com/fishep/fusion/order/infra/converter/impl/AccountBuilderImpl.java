@@ -5,14 +5,14 @@ import cn.hutool.core.date.DateUtil;
 import com.fishep.fusion.common.type.AccountId;
 import com.fishep.fusion.common.type.Money;
 import com.fishep.fusion.order.domain.entity.Account;
-import com.fishep.fusion.order.infra.converter.AccountConverter;
+import com.fishep.fusion.order.infra.converter.AccountBuilder;
 import com.fishep.fusion.order.infra.feign.response.AccountResponse;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 
 @Component
-public class AccountConverterImpl implements AccountConverter {
+public class AccountBuilderImpl implements AccountBuilder {
 
     @Override
     public Account toAccount(AccountResponse response) {

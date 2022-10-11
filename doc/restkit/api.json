@@ -1,5 +1,5 @@
 {
-  "currentEnv": "stock-app",
+  "currentEnv": "order-app",
   "envList": [
     {
       "env": "user-app",
@@ -28,6 +28,26 @@
           "enabled": true,
           "key": "baseUrl",
           "value": "http://localhost:9040"
+        }
+      ]
+    },
+    {
+      "env": "finance-app",
+      "items": [
+        {
+          "enabled": true,
+          "key": "baseUrl",
+          "value": "http://localhost:9030"
+        }
+      ]
+    },
+    {
+      "env": "order-app",
+      "items": [
+        {
+          "enabled": true,
+          "key": "baseUrl",
+          "value": "http://localhost:9020"
         }
       ]
     }

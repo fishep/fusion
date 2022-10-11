@@ -1,5 +1,6 @@
 package com.fishep.fusion.order.application.cqe;
 
+import com.fishep.fusion.common.type.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,16 +14,26 @@ public class PlaceOrderCommand {
     @Data
     @AllArgsConstructor
     public static class Product {
-        public Long productId;
-        public String productUnit;
-        public Integer productCount;
+        public ProductId id;
+        public Quantity quantity;
+
+        public Product(Long id, String unit, Integer count) {
+            this.id = new ProductId(id);
+            this.quantity = new Quantity(unit, count);
+        }
+    }
+
+    public PlaceOrderCommand(Long accountId, String currency, List<Product> products) {
+        this.accountId = new AccountId(accountId);
+        this.currency = new Currency(currency);
+        this.products = products;
     }
 
     @NotNull
-    public Long accountId;
+    public AccountId accountId;
 
     @NotNull
-    public String currency;
+    public Currency currency;
 
     @NotNull
     public List<Product> products;

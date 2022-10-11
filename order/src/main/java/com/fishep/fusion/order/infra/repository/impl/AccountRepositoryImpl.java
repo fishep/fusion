@@ -4,7 +4,7 @@ import com.fishep.fusion.common.response.Result;
 import com.fishep.fusion.common.type.AccountId;
 import com.fishep.fusion.order.domain.entity.Account;
 import com.fishep.fusion.order.domain.repository.AccountRepository;
-import com.fishep.fusion.order.infra.converter.AccountConverter;
+import com.fishep.fusion.order.infra.converter.AccountBuilder;
 import com.fishep.fusion.order.infra.feign.AccountFeign;
 import com.fishep.fusion.order.infra.feign.request.AccountUpdateRequest;
 import com.fishep.fusion.order.infra.feign.response.AccountResponse;
@@ -18,7 +18,7 @@ public class AccountRepositoryImpl implements AccountRepository {
     AccountFeign accountFeign;
 
     @Autowired
-    AccountConverter accountConverter;
+    AccountBuilder accountBuilder;
 
     @Override
     public Account find(AccountId accountId) {
@@ -31,7 +31,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
         AccountResponse data = ret.getData();
 
-        Account account = accountConverter.toAccount(data);
+        Account account = accountBuilder.toAccount(data);
 
         return account;
     }

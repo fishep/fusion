@@ -56,12 +56,12 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public OrderDTO placeOrder(@Valid PlaceOrderCommand placeOrderCommand) {
 
-        Currency currency = new Currency(placeOrderCommand.getCurrency());
-        AccountId accountId = new AccountId(placeOrderCommand.getAccountId());
+        Currency currency = placeOrderCommand.getCurrency();
+        AccountId accountId = placeOrderCommand.getAccountId();
 
         List<OrderProduct> orderProducts = new ArrayList<>();
         for (PlaceOrderCommand.Product p : placeOrderCommand.getProducts()){
-            OrderProduct orderProduct = new OrderProduct(new ProductId(p.getProductId()), new Quantity(p.getProductUnit(), p.getProductCount()), new Money(currency, 0));
+            OrderProduct orderProduct = new OrderProduct(p.getId(), p.getQuantity());
             orderProducts.add(orderProduct);
         }
 
