@@ -1,23 +1,24 @@
 package com.fishep.fusion.order.infra.repository.impl;
 
 import com.fishep.fusion.common.response.Result;
+import com.fishep.fusion.common.rpc.AccountRpc;
+import com.fishep.fusion.common.rpc.request.AccountUpdateRequest;
+import com.fishep.fusion.common.rpc.response.AccountResponse;
 import com.fishep.fusion.common.type.AccountId;
 import com.fishep.fusion.order.domain.entity.Account;
 import com.fishep.fusion.order.domain.repository.AccountRepository;
 import com.fishep.fusion.order.infra.converter.AccountBuilder;
-import com.fishep.fusion.order.infra.feign.AccountFeign;
-import com.fishep.fusion.order.infra.feign.request.AccountUpdateRequest;
-import com.fishep.fusion.order.infra.feign.response.AccountResponse;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
-public class AccountRepositoryImpl implements AccountRepository {
+//@Primary
+public class AccountRepositoryDubboImpl implements AccountRepository {
 
-    @Autowired
-    AccountFeign accountFeign;
+    @DubboReference
+    AccountRpc accountRpc;
 
     @Autowired
     AccountBuilder accountBuilder;
@@ -25,9 +26,9 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public Account find(AccountId accountId) {
 
-        Result<AccountResponse> ret = accountFeign.one(accountId.getValue());
+        Result<AccountResponse> ret = accountRpc.one(accountId.getValue());
 
-        if (ret.getCode() != 200){
+        if (ret.getCode() != 200) {
             throw new RuntimeException(ret.getMessage());
         }
 
@@ -45,9 +46,9 @@ public class AccountRepositoryImpl implements AccountRepository {
         request.setCurrency(account.getAmount().getCurrency().getCodeName());
         request.setAmount(account.getAmount().getValue());
 
-        Result<Boolean> ret = accountFeign.save(account.getId().getValue(), request);
+        Result<Boolean> ret = accountRpc.save(account.getId().getValue(), request);
 
-        if (ret.getCode() != 200 || !ret.getData()){
+        if (ret.getCode() != 200 || !ret.getData()) {
             throw new RuntimeException(ret.getMessage());
         }
 

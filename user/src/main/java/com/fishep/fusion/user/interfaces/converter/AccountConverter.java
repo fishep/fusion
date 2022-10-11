@@ -7,4 +7,6 @@ public interface AccountConverter {
 
     AccountResponse toAccountResponse(AccountDTO accountDTO);
 
+    com.fishep.fusion.common.rpc.response.AccountResponse toRpcAccountResponse(AccountDTO accountDTO);
+
 }

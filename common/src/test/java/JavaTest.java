@@ -10,7 +10,7 @@ public class JavaTest {
         for (int i = 0; i < 20; i++)
         {
             Random random = new Random();
-            System.out.println(random.nextInt(1, 100));
+            System.out.println(random.nextInt(0, 2));
         }
 
     }

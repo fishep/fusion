@@ -26,4 +26,17 @@ public class AccountBuilderImpl implements AccountBuilder {
 
         return account;
     }
+
+    @Override
+    public Account toAccount(com.fishep.fusion.common.rpc.response.AccountResponse response) {
+
+        AccountId accountId = new AccountId(response.getId());
+        Money amount = new Money(response.getCurrency(), response.getAmount());
+        Instant createAt = DateUtil.parse(response.getCreatedAt(), DatePattern.UTC_PATTERN).toInstant();
+        Instant updateAt = DateUtil.parse(response.getUpdatedAt(), DatePattern.UTC_PATTERN).toInstant();
+
+        Account account = new Account(accountId, amount, createAt, updateAt);
+
+        return account;
+    }
 }

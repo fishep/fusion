@@ -66,3 +66,5 @@ dubbo:
     port: -1
   registry:
     address: spring-cloud://localhost:8848
+  cloud:
+    subscribed-services: user-app

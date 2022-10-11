@@ -12,6 +12,7 @@ import com.fishep.fusion.order.application.service.ShopService;
 import com.fishep.fusion.order.interfaces.converter.OrderConverter;
 import com.fishep.fusion.order.interfaces.request.CreateOrderRequest;
 import com.fishep.fusion.order.interfaces.response.CreateOrderResponse;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

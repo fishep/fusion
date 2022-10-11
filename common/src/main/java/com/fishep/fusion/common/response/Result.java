@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Result<T> {
+public class Result<T> implements Serializable {
 
     // 1000 以下保持和http的状态码一致， 1000 以上为自定义状态码
     private Integer code;

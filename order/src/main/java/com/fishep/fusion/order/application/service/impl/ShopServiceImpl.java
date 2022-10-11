@@ -17,6 +17,7 @@ import com.fishep.fusion.order.domain.repository.ProductRepository;
 import com.fishep.fusion.order.domain.repository.StockRepository;
 import com.fishep.fusion.order.domain.service.ExchangeRateService;
 import com.fishep.fusion.order.domain.service.OrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +25,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Validated
@@ -54,6 +56,7 @@ public class ShopServiceImpl implements ShopService {
     OrderMessageProducer orderMessageProducer;
 
     @Override
+    @GlobalTransactional(name = "gt", rollbackFor = Exception.class)
     public OrderDTO placeOrder(@Valid PlaceOrderCommand placeOrderCommand) {
 
         Currency currency = placeOrderCommand.getCurrency();
@@ -93,6 +96,10 @@ public class ShopServiceImpl implements ShopService {
 
         // 对象转换
         OrderDTO orderDTO = orderAssembler.toDTO(order);
+
+//        if (new Random().nextInt(0, 2) == 1){
+//            throw new RuntimeException("throw test exception");
+//        }
 
         return orderDTO;
     }

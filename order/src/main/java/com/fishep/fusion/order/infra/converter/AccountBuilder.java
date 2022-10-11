@@ -7,4 +7,6 @@ public interface AccountBuilder {
 
     Account toAccount(AccountResponse response);
 
+    Account toAccount(com.fishep.fusion.common.rpc.response.AccountResponse response);
+
 }

@@ -26,4 +26,20 @@ public class AccountConverterImpl implements AccountConverter {
 
         return accountResponse;
     }
+
+    @Override
+    public com.fishep.fusion.common.rpc.response.AccountResponse toRpcAccountResponse(AccountDTO accountDTO) {
+        com.fishep.fusion.common.rpc.response.AccountResponse accountResponse = new com.fishep.fusion.common.rpc.response.AccountResponse();
+        accountResponse.setId(accountDTO.getId());
+        accountResponse.setNumber(accountDTO.getNumber());
+        accountResponse.setUserId(accountDTO.getUserId());
+        accountResponse.setName(accountDTO.getName());
+        accountResponse.setCurrency(accountDTO.getCurrency());
+        accountResponse.setAmount(accountDTO.getAmount());
+        accountResponse.setQuota(accountDTO.getQuota());
+        accountResponse.setCreatedAt(Instant.ofEpochSecond(accountDTO.getCreatedAt()).toString());
+        accountResponse.setUpdatedAt(Instant.ofEpochSecond(accountDTO.getUpdatedAt()).toString());
+
+        return accountResponse;
+    }
 }
