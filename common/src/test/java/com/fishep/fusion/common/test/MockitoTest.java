@@ -1,6 +1,7 @@
 package com.fishep.fusion.common.test;
 
-import com.fishep.fusion.common.test.impl.ServiceImpl;
+import com.fishep.fusion.common.test.service.impl.ServiceImpl;
+import com.fishep.fusion.common.test.service.SayService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

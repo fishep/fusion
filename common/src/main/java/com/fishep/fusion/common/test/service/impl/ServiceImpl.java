@@ -1,7 +1,7 @@
-package com.fishep.fusion.common.test.impl;
+package com.fishep.fusion.common.test.service.impl;
 
-import com.fishep.fusion.common.test.SayService;
-import com.fishep.fusion.common.test.Service;
+import com.fishep.fusion.common.test.service.SayService;
+import com.fishep.fusion.common.test.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServiceImpl implements Service {
