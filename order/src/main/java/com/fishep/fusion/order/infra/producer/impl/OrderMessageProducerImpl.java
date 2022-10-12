@@ -12,17 +12,22 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-//@EnableBinding(Source.class)
+@EnableBinding(Source.class)
 public class OrderMessageProducerImpl implements OrderMessageProducer {
 
-//    @Autowired
-//    private MessageChannel output;
+    @Autowired
+    private MessageChannel output;
 
     @Override
-    public void send(OrderCreated orderCreated) {
+    public Boolean send(OrderCreated orderCreated) {
 
-//        output.send(MessageBuilder.withPayload(orderCreated).build());
+        boolean flag = output.send(MessageBuilder.withPayload(orderCreated).build());
+        if (!flag){
+            throw new RuntimeException("OrderCreated message send fail, " + orderCreated);
+        }
 
         log.info("OrderMessageProducerImpl send message: " + orderCreated);
+
+        return flag;
     }
 }

@@ -24,8 +24,8 @@ spring:
       bindings:
         input:
           destination: TOPIC-01
-          content-type: application/json
-#          group: user-group-TOPIC-01 # 消费者分组,命名规则：组名+topic名
+#          content-type: application/json
+          group: user-group-TOPIC-01 # 消费者分组,命名规则：组名+topic名
       rocketmq:
         binder:
           name-server: localhost:9876

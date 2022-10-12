@@ -17,7 +17,7 @@ import com.fishep.fusion.order.domain.repository.ProductRepository;
 import com.fishep.fusion.order.domain.repository.StockRepository;
 import com.fishep.fusion.order.domain.service.ExchangeRateService;
 import com.fishep.fusion.order.domain.service.OrderService;
-import io.seata.spring.annotation.GlobalTransactional;
+//import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -56,7 +56,7 @@ public class ShopServiceImpl implements ShopService {
     OrderMessageProducer orderMessageProducer;
 
     @Override
-    @GlobalTransactional(name = "gt", rollbackFor = Exception.class)
+//    @GlobalTransactional(name = "gt", rollbackFor = Exception.class)
     public OrderDTO placeOrder(@Valid PlaceOrderCommand placeOrderCommand) {
 
         Currency currency = placeOrderCommand.getCurrency();

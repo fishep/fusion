@@ -11,15 +11,17 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-//@EnableBinding(Sink.class)
+@EnableBinding(Sink.class)
 public class OrderMessageReceiverImpl implements OrderMessageReceiver {
 
     @Override
-//    @StreamListener(Sink.INPUT)
-//    public void recv(Message<OrderCreatedMessage> message)
-    public void recv(Message<String> message) {
-
+    @StreamListener(Sink.INPUT)
+    public void recv(Message<OrderCreatedMessage> message) {
         log.info("OrderMessageReceiverImpl, recv message: " + message.getPayload());
 
+        OrderCreatedMessage orderCreatedMessage = message.getPayload();
+
+        log.info("account id : " + orderCreatedMessage.getAccountId().getValue());
+        log.info("order number : " + orderCreatedMessage.getOrderNumber().getValue());
     }
 }
