@@ -58,7 +58,11 @@ abstract public class AbstractNumber {
             throw new RuntimeException("number is too long ,length is " + length);
         }
 
-        fill = "0".repeat(this.length - length);
+//        fill = "0".repeat(this.length - length);
+        fill = "";
+        for (int i = 0; i < this.length - length; i++){
+            fill += "0";
+        }
 
         return fill;
     }

@@ -31,7 +31,7 @@ public class StockController {
                     new StockResponse(
                             new StockId().getValue(),
                             pid,
-                            new Random().nextInt(10, 100),
+                            new Random().nextInt(10) + 10, // [0, 20)
                             "PCS",
                             Instant.ofEpochSecond(1664183128).toString(),
                             Instant.ofEpochSecond(1664183128).toString()
