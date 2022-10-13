@@ -100,9 +100,9 @@ public class ShopServiceImpl implements ShopService {
 //        if (new Random().nextInt(0, 2) == 1){
 //            throw new RuntimeException("throw test exception");
 //        }
-//        if (new Random().nextInt(5) == 1) {
-//            throw new RuntimeException("throw test exception");
-//        }
+        if (new Random().nextInt(5) == 1) {
+            throw new RuntimeException("throw test exception");
+        }
 
         return orderDTO;
     }
