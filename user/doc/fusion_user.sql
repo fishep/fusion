@@ -44,7 +44,7 @@ create table `accounts`
 );
 
 insert into `accounts`(`id`, `number`, `user_id`, `name`, `currency`, `amount`, `quota`, `created_at`, `updated_at`) VALUES (1572870916451594444, "AC20220926000001",1572870916451598336, "account1", "CNY", 10000, 100, 1664183128, 1664183128);
-insert into `accounts`(`id`, `number`, `user_id`, `name`, `currency`, `amount`, `quota`, `created_at`, `updated_at`) VALUES (1572870916451594445, "AC20220926000002",1572870916451598336, "account2", "CNY", 1, 1000, 1664183128, 1664183128);
+insert into `accounts`(`id`, `number`, `user_id`, `name`, `currency`, `amount`, `quota`, `created_at`, `updated_at`) VALUES (1572870916451594445, "AC20220926000002",1572870916451598336, "account2", "USD", 100, 1000, 1664183128, 1664183128);
 delete from `accounts` where `id` = 1572870916451594444;
 update `accounts` set `updated_at` = 1664183128 where `id` = 1572870916451594444;
 select * from `accounts`;

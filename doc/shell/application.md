@@ -22,8 +22,8 @@ set JAVA_HOME=E:\java\jdk\corretto-1.8.0_342
 set PATH=%JAVA_HOME%\bin;%PATH%
 
 # linux or mac set java8 environment, via environment variable or absolute path
-JAVA_HOME=$JAVA8_HOME
-JAVA_HOME=/e/java/jdk/corretto-1.8.0_342
-PATH="$JAVA_HOME/bin:$PATH"
+export JAVA_HOME=$JAVA8_HOME
+export JAVA_HOME=/e/java/jdk/corretto-1.8.0_342
+export PATH="$JAVA_HOME/bin:$PATH"
 
 ```
