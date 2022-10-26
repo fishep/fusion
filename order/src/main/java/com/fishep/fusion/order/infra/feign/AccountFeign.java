@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(value = "user-app", fallback = AccountFeignImpl.class)
 public interface AccountFeign {
 
-    @GetMapping("/api/account/accounts/{id}")
+    @GetMapping("/api/user/account/accounts/{id}")
     Result<AccountResponse> one(@PathVariable("id") Long id);
 
-    @PostMapping("/api/account/accounts/{id}")
+    @PostMapping("/api/user/account/accounts/{id}")
     Result<Boolean> save(@PathVariable("id") Long id, @RequestBody AccountUpdateRequest request);
 }

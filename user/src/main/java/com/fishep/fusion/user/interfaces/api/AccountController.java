@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/user/account")
 public class AccountController {
 
     @Value("${server.port}")

@@ -6,8 +6,9 @@
 
 ### 微服务
 - http://app
-  - common,  port: 9000
-  - reserve, port: 9001 - 9009
+  - reserve           port: 9000 - 9009
+  - common            port: 9000
+  - gateway           port: 9001
 
 - http://user-app    port: 9010 - 9019
 - http://order-app   port: 9020 - 9029

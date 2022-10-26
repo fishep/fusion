@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 class AccountControllerTest {
 
-    private String uri = "/api/account/accounts/1572870916451594444";
+    private String uri = "/api/user/account/accounts/1572870916451594444";
 
     @Autowired
     private MockMvc mockMvc;

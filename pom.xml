@@ -16,6 +16,7 @@
         <module>finance</module>
         <module>stock</module>
         <module>product</module>
+        <module>gateway</module>
     </modules>
 
     <properties>

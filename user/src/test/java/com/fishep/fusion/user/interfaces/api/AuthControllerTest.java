@@ -21,8 +21,8 @@ import java.util.Map;
 @AutoConfigureMockMvc
 class AuthControllerTest {
 
-    private String registerUri = "/api/auth/register";
-    private String loginUri = "/api/auth/login";
+    private String registerUri = "/api/user/auth/register";
+    private String loginUri = "/api/user/auth/login";
 
     @Autowired
     private MockMvc mockMvc;

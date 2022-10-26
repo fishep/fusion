@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/message")
+@RequestMapping("/api/common/message")
 public class MessageController {
 
     @Autowired
