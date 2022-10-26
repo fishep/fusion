@@ -7,6 +7,6 @@ public class UserTokenDTO {
 
     UserDTO userDTO;
 
-    String token;
+    TokenDTO tokenDTO;
 
 }

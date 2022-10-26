@@ -5,3 +5,9 @@ spring:
     name: user-app
   profiles:
     active: dev
+
+jwt:
+  # jwt 自定义秘钥
+  secretKey: 12345678123456781234567812345678
+  # 过期时间 单位：秒， 60 * 60 * 24
+  expire: 86400

@@ -28,12 +28,14 @@ public class UserConverterImpl implements UserConverter {
     public UserLoginResponse toVO(UserTokenDTO userTokenDTO) {
 
         UserLoginResponse response = new UserLoginResponse();
-        response.setId(userTokenDTO.getUserDTO().getId());
-        response.setName(userTokenDTO.getUserDTO().getName());
-        response.setEmail(userTokenDTO.getUserDTO().getEmail());
-        response.setCreatedAt(Instant.ofEpochSecond(userTokenDTO.getUserDTO().getCreatedAt()).toString());
-        response.setUpdatedAt(Instant.ofEpochSecond(userTokenDTO.getUserDTO().getUpdatedAt()).toString());
-        response.setToken(userTokenDTO.getToken());
+        response.getUser().setId(userTokenDTO.getUserDTO().getId());
+        response.getUser().setName(userTokenDTO.getUserDTO().getName());
+        response.getUser().setEmail(userTokenDTO.getUserDTO().getEmail());
+        response.getUser().setCreatedAt(Instant.ofEpochSecond(userTokenDTO.getUserDTO().getCreatedAt()).toString());
+        response.getUser().setUpdatedAt(Instant.ofEpochSecond(userTokenDTO.getUserDTO().getUpdatedAt()).toString());
+        response.getToken().setAccessToken(userTokenDTO.getTokenDTO().getAccessToken());
+        response.getToken().setTokenType(userTokenDTO.getTokenDTO().getTokenType());
+        response.getToken().setExpiresIn(userTokenDTO.getTokenDTO().getExpiresIn());
 
         return response;
     }
