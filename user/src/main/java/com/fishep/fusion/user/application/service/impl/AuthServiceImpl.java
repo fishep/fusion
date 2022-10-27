@@ -95,6 +95,7 @@ public class AuthServiceImpl implements AuthService {
         builder.setSubject("auth");
         builder.setExpiration(Date.from(Instant.now().plusSeconds(jwtExpire)));
         builder.claim("uid", user.getId().getValue());
+        builder.claim("unm", user.getName().getValue());
         builder.signWith(Keys.hmacShaKeyFor(jwtSecretKey.getBytes()));
         String jws = builder.compact();
 

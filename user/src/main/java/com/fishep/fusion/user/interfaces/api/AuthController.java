@@ -3,12 +3,12 @@ package com.fishep.fusion.user.interfaces.api;
 import com.fishep.fusion.common.annotation.ResultHandler;
 import com.fishep.fusion.common.response.Result;
 import com.fishep.fusion.common.type.Email;
+import com.fishep.fusion.common.type.UserName;
 import com.fishep.fusion.user.application.cqe.UserEmailLoginCommand;
 import com.fishep.fusion.user.application.cqe.UserNameLoginCommand;
 import com.fishep.fusion.user.application.dto.UserDTO;
 import com.fishep.fusion.user.application.dto.UserTokenDTO;
 import com.fishep.fusion.user.application.service.AuthService;
-import com.fishep.fusion.common.type.UserName;
 import com.fishep.fusion.user.interfaces.converter.UserConverter;
 import com.fishep.fusion.user.interfaces.request.UserLoginRequest;
 import com.fishep.fusion.user.interfaces.request.UserRegisterRequest;
@@ -17,10 +17,9 @@ import com.fishep.fusion.user.interfaces.response.UserRegisterResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
@@ -56,9 +55,8 @@ public class AuthController {
     public Result<UserLoginResponse> login(@RequestBody UserLoginRequest request) {
         UserTokenDTO userTokenDTO;
 
-        switch (request.determineNameOrEmail())
-        {
-            case "email" :
+        switch (request.determineNameOrEmail()) {
+            case "email":
                 Email email = new Email(request.getIdentify());
                 UserEmailLoginCommand emailLoginCommand = new UserEmailLoginCommand();
                 emailLoginCommand.setUserEmail(email);
@@ -66,7 +64,7 @@ public class AuthController {
 
                 userTokenDTO = authService.login(emailLoginCommand);
                 break;
-            case "name" :
+            case "name":
                 UserName userName = new UserName(request.getIdentify());
                 UserNameLoginCommand nameLoginCommand = new UserNameLoginCommand();
                 nameLoginCommand.setUserName(userName);
@@ -81,5 +79,12 @@ public class AuthController {
         UserLoginResponse vo = userConverter.toVO(userTokenDTO);
 
         return new Result<>(200, "user login success!", vo);
+    }
+
+    @ResultHandler
+    @GetMapping("/gateway/header")
+//    public Result<String> login(HttpServletRequest request)
+    public Result<String> login(@RequestHeader("Fusion-User-Id") String userId, @RequestHeader("Fusion-User-Name") String userName) {
+        return new Result<>(200, "user are logged, gateway header info", "userId: " + userId + ", userName: " + userName);
     }
 }

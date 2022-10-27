@@ -5,6 +5,7 @@ import com.fishep.fusion.user.application.dto.UserTokenDTO;
 import com.fishep.fusion.user.interfaces.converter.UserConverter;
 import com.fishep.fusion.user.interfaces.response.UserLoginResponse;
 import com.fishep.fusion.user.interfaces.response.UserRegisterResponse;
+import com.fishep.fusion.user.interfaces.response.UserResponse;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -36,6 +37,18 @@ public class UserConverterImpl implements UserConverter {
         response.getToken().setAccessToken(userTokenDTO.getTokenDTO().getAccessToken());
         response.getToken().setTokenType(userTokenDTO.getTokenDTO().getTokenType());
         response.getToken().setExpiresIn(userTokenDTO.getTokenDTO().getExpiresIn());
+
+        return response;
+    }
+
+    @Override
+    public UserResponse toUserResponse(UserDTO userDTO) {
+        UserResponse response = new UserResponse();
+        response.setId(userDTO.getId());
+        response.setName(userDTO.getName());
+        response.setEmail(userDTO.getEmail());
+        response.setCreatedAt(Instant.ofEpochSecond(userDTO.getCreatedAt()).toString());
+        response.setUpdatedAt(Instant.ofEpochSecond(userDTO.getUpdatedAt()).toString());
 
         return response;
     }

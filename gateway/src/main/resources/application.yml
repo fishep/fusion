@@ -14,8 +14,8 @@ jwt:
 
 auth:
   guest:
-    # 不认证的uri正则表达式，多条规则
-    routes: '/api/user/auth/*, /api/user/auth/register, /api/user/auth/login'
+    # 不认证的uri正则表达式，多条规则 /api/user/auth/*,
+    routes: '/api/user/auth/register, /api/user/auth/login'
 #    routes:
 #      - '/api/user/auth/register'
 #      - '/api/user/auth/login'

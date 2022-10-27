@@ -1,11 +1,15 @@
 package com.fishep.fusion.gateway.filter;
 
+//import com.fishep.fusion.common.response.Result;
+import com.fishep.fusion.gateway.feign.UserFeign;
+import com.fishep.fusion.gateway.feign.response.UserResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -29,6 +33,9 @@ public class AuthFilter implements GlobalFilter {
     @Value("${auth.guest.routes}")
     private String[] guestRoutes;
 
+//    @Autowired
+//    private UserFeign userFeign;
+
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 
@@ -51,20 +58,27 @@ public class AuthFilter implements GlobalFilter {
         }
 
         String[] split = token.split("\\s+");
-        String type = split[0];
+//        String type = split[0];
         String jws = split[1];
 
         SecretKey sKey = Keys.hmacShaKeyFor(jwtSecretKey.getBytes());
         Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(sKey).build().parseClaimsJws(jws);
 
         //OK, we can trust this JWT
-        JwsHeader header = claimsJws.getHeader();
+//        JwsHeader header = claimsJws.getHeader();
         Claims body = claimsJws.getBody();
-        String subject = body.getSubject();
-        Date expiration = body.getExpiration();
+//        String subject = body.getSubject();
+//        Date expiration = body.getExpiration();
         Long uid = body.get("uid", Long.class);
-        String signature = claimsJws.getSignature();
+        String unm = body.get("unm", String.class);
+//        String signature = claimsJws.getSignature();
 
-        return chain.filter(exchange);
+//        Result<UserResponse> one = userFeign.one(uid);
+
+        ServerHttpRequest.Builder builder = request.mutate();
+        builder.header("Fusion-User-Id", String.valueOf(uid));
+        builder.header("Fusion-User-Name", unm);
+
+        return chain.filter(exchange.mutate().request(builder.build()).build());
     }
 }
