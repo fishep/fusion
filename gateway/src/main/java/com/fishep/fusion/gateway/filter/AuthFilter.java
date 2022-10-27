@@ -1,15 +1,10 @@
 package com.fishep.fusion.gateway.filter;
 
-//import com.fishep.fusion.common.response.Result;
-import com.fishep.fusion.gateway.feign.UserFeign;
-import com.fishep.fusion.gateway.feign.response.UserResponse;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -20,7 +15,6 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.crypto.SecretKey;
-import java.util.Date;
 import java.util.stream.Stream;
 
 @Component
@@ -32,9 +26,6 @@ public class AuthFilter implements GlobalFilter {
 
     @Value("${auth.guest.routes}")
     private String[] guestRoutes;
-
-//    @Autowired
-//    private UserFeign userFeign;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -72,8 +63,6 @@ public class AuthFilter implements GlobalFilter {
         Long uid = body.get("uid", Long.class);
         String unm = body.get("unm", String.class);
 //        String signature = claimsJws.getSignature();
-
-//        Result<UserResponse> one = userFeign.one(uid);
 
         ServerHttpRequest.Builder builder = request.mutate();
         builder.header("Fusion-User-Id", String.valueOf(uid));
