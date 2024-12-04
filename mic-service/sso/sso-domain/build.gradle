@@ -1,0 +1,5 @@
+description = "sso领域层"
+
+dependencies {
+    api(project(":mic-service:ddd:ddd-domain"))
+}

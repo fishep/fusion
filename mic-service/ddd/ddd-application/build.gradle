@@ -1,0 +1,5 @@
+description = "应用层的公共包，提炼所有微服务的应用层公用的类"
+
+dependencies {
+    api(project(":mic-service:ddd:ddd-domain"))
+}

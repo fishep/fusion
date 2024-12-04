@@ -1,0 +1,6 @@
+description = "oms基础设施层"
+
+dependencies {
+    api(project(":mic-service:ddd:ddd-infrastructure"))
+    api(project(":mic-service:oms:oms-domain"))
+}

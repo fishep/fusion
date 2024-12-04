@@ -1,0 +1,6 @@
+description = "wms基础设施层"
+
+dependencies {
+    api(project(":mic-service:ddd:ddd-infrastructure"))
+    api(project(":mic-service:wms:wms-domain"))
+}

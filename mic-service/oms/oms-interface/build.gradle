@@ -1,0 +1,6 @@
+description = "oms接口层"
+
+dependencies {
+    api(project(":mic-service:ddd:ddd-interface"))
+    api(project(":mic-service:oms:oms-application"))
+}
