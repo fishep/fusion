@@ -1,7 +1,7 @@
 package com.fishep.fusion.mic.ddd.domain.type;
 
 import cn.hutool.core.util.IdUtil;
-import com.fishep.fusion.mic.ddd.domain.exception.ValidationException;
+import com.fishep.fusion.mic.ddd.domain.exception.ValidateException;
 import lombok.Getter;
 
 /**
@@ -10,24 +10,20 @@ import lombok.Getter;
  * @Desc 自增不连续，当运行多个实例时，小概率不唯一，当datacenterId + workerId一致时（1/1024的概率），在同一毫秒生成时，会重复
  **/
 @Getter
-public class Id {
+public abstract class Id {
 
     protected Long value;
 
-    public Id() {
+    protected Id() {
         this(IdUtil.getSnowflakeNextId());
     }
 
-    public Id(Long value) {
+    protected Id(Long value) {
         if (value <= 0) {
-            throw new ValidationException("The ID value must be greater than 0");
+            throw new ValidateException("The ID value must be greater than 0");
         }
 
         this.value = value;
-    }
-
-    public static Id generate() {
-        return new Id(IdUtil.getSnowflakeNextId());
     }
 
 }

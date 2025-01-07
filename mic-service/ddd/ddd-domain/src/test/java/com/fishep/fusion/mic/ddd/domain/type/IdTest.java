@@ -1,6 +1,6 @@
 package com.fishep.fusion.mic.ddd.domain.type;
 
-import com.fishep.fusion.mic.ddd.domain.exception.ValidationException;
+import com.fishep.fusion.mic.ddd.domain.exception.ValidateException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,12 +12,21 @@ import static org.junit.jupiter.api.Assertions.*;
  **/
 class IdTest {
 
+    public class EntityId extends Id {
+        public EntityId() {
+        }
+
+        public EntityId(Long value) {
+            super(value);
+        }
+    }
+
     @Test
     void autoIncrement() {
-        Id id1 = new Id();
+        Id id1 = new EntityId();
         assertNotNull(id1.getValue());
 
-        Id id2 = new Id();
+        Id id2 = new EntityId();
         assertNotNull(id2.getValue());
 
         assertTrue(id1.getValue() < id2.getValue());
@@ -25,11 +34,11 @@ class IdTest {
 
     @Test
     void validation() {
-        assertThrows(ValidationException.class, () -> { new Id(Long.MIN_VALUE); });
-        assertThrows(ValidationException.class, () -> { new Id(-1L); });
-        assertThrows(ValidationException.class, () -> { new Id(0L); });
-        assertDoesNotThrow(() -> { new Id(1L); });
-        assertDoesNotThrow(() -> { new Id(Long.MAX_VALUE); });
+        assertThrows(ValidateException.class, () -> { new EntityId(Long.MIN_VALUE); });
+        assertThrows(ValidateException.class, () -> { new EntityId(-1L); });
+        assertThrows(ValidateException.class, () -> { new EntityId(0L); });
+        assertDoesNotThrow(() -> { new EntityId(1L); });
+        assertDoesNotThrow(() -> { new EntityId(Long.MAX_VALUE); });
     }
 
 }
