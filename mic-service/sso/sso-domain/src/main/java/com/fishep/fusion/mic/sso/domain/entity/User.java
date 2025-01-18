@@ -80,12 +80,18 @@ public abstract class User {
         throw new ValidateException("Unsupported authentication method");
     }
 
+    public void setActivated() {
+        activated = Boolean.TRUE;
+    }
+
     public boolean isActivated() {
         return activated == null ? false : activated;
     }
 
-    public void setActivated() {
-        activated = Boolean.TRUE;
+    public void assertActivated() {
+        if (!isActivated()) {
+            throw new ValidateException("User not activated");
+        }
     }
 
 }

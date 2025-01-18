@@ -25,6 +25,23 @@ public interface UserRepository {
     <T extends User> User find(Identifier identifier, Class<T> userClass);
 
     /**
+     * @param identifier
+     * @param userClass
+     * @param <T>
+     * @return 查找用户，找到返回，未找到抛异常
+     */
+    <T extends User> User findOrException(Identifier identifier, Class<T> userClass);
+
+    /**
+     * 根据identifier查找用户，并将数据同步设置到 user
+     *
+     * @param identifier
+     * @param user
+     * @return user
+     */
+    User findAndSync(Identifier identifier, User user);
+
+    /**
      * 保存，但不会修改实体对象
      *
      * @param user
@@ -33,11 +50,36 @@ public interface UserRepository {
     boolean save(User user);
 
     /**
+     * 保存成功 或者 抛异常
+     *
+     * @param user
+     * @return
+     */
+    void saveOrException(User user);
+
+    /**
      * 保存，同时修改传入的实体对象, 将实体的数据存入数据库，同时加载数据库的数据到实体（如果失败则抛异常）
      *
      * @param user
      * @return 成功返回true，失败返回false
      */
-    boolean sync(User user);
+    boolean saveAndSync(User user);
+
+    /**
+     * 断言用户不存在，如果用户存在则抛异常
+     *
+     * @param identifier
+     * @param userClass
+     * @param <T>
+     */
+    <T extends User> void assertNotExist(Identifier identifier, Class<T> userClass);
+
+    /**
+     * 断言用户不存在，如果用户存在则抛异常
+     *
+     * @param user
+     * @param <T>
+     */
+    <T extends User> void assertNotExist(User user);
 
 }

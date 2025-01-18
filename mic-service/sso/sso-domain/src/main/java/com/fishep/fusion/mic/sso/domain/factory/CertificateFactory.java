@@ -34,6 +34,18 @@ public class CertificateFactory {
         return (Password) create(plaintext, hashService);
     }
 
+    public Certificate generate(Class<? extends Certificate> clazz) {
+        if (Password.class.equals(clazz)) {
+            return generatePassword();
+        }
+
+        if (VerificationCode.class.equals(clazz)) {
+            return generateVerificationCode();
+        }
+
+        throw new ValidateException("Unsupported generate certificate types, certificate: {}", clazz.getName());
+    }
+
     public static Certificate create(String plaintext, CertificateHashService hashService) {
         if (!StrUtil.isBlank(plaintext)) {
             if (plaintext.length() == 6) {

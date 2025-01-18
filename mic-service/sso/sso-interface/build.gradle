@@ -3,4 +3,8 @@ description = "sso接口层"
 dependencies {
     api(project(":mic-service:ddd:ddd-interface"))
     api(project(":mic-service:sso:sso-application"))
+
+//    implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-webmvc'
+//    implementation 'org.springframework:spring-webflux'
 }

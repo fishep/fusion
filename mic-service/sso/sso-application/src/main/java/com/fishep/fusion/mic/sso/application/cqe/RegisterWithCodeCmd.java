@@ -15,7 +15,7 @@ public abstract class RegisterWithCodeCmd extends RegisterCmd {
 
     public String verificationCode;
 
-    public VerificationCode getVerificationCode(CertificateHashService certificateHashService) {
+    public VerificationCode getVerificationCodeEntity(CertificateHashService certificateHashService) {
         return (VerificationCode) CertificateFactory.create(verificationCode, certificateHashService);
     }
 

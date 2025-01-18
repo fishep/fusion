@@ -29,7 +29,7 @@ public interface AuthService {
      * @param sendVerificationCodeCmd
      * @return
      */
-    VerificationCodeDto sendVerificationCodeCmd(SendVerificationCodeCmd sendVerificationCodeCmd);
+    VerificationCodeDto sendVerificationCode(SendVerificationCodeCmd sendVerificationCodeCmd);
 
     /**
      * 激活用户，验证用户注册的信息的有效性，激活之后才能登录

@@ -10,10 +10,10 @@ import lombok.Getter;
  **/
 @Getter
 @AllArgsConstructor
-public class VerificationMessage {
+public class CertificateMessage {
 
     protected Identifier identifier;
 
-    protected VerificationCode verificationCode;
+    protected Certificate certificate;
 
 }

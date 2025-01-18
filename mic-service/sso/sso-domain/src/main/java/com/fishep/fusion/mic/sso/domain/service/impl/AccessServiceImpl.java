@@ -1,5 +1,6 @@
 package com.fishep.fusion.mic.sso.domain.service.impl;
 
+import com.fishep.fusion.mic.ddd.domain.exception.ValidateException;
 import com.fishep.fusion.mic.ddd.domain.service.BiEntityPolicy;
 import com.fishep.fusion.mic.ddd.domain.service.BiEntityPolicyManager;
 import com.fishep.fusion.mic.sso.domain.entity.Admin;
@@ -18,6 +19,13 @@ import com.fishep.fusion.mic.sso.domain.type.Mall;
 public class AccessServiceImpl implements AccessService {
 
     private AccessManager manager = new AccessManager();
+
+    @Override
+    public void assertCanAccess(User user, App app) {
+        if (!canAccess(user, app)) {
+            throw new ValidateException("Users cannot access the application");
+        }
+    }
 
     @Override
     public boolean canAccess(User user, App app) {

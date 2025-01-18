@@ -1,6 +1,7 @@
 package com.fishep.fusion.mic.sso.domain.entity;
 
-import com.fishep.fusion.mic.sso.domain.type.*;
+import com.fishep.fusion.mic.sso.domain.type.CustomerId;
+import com.fishep.fusion.mic.sso.domain.type.Identifier;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,13 +14,10 @@ import lombok.Setter;
 @Setter
 public class Customer extends User {
 
-    private UserName userName;
-
-    private Email email;
-
-    private PhoneNumber phoneNumber;
-
     // 其他属性
+    @Getter
+    @Setter
+    private Object field;
 
 
     public Customer() {

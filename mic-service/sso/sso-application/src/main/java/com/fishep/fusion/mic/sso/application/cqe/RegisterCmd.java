@@ -1,10 +1,8 @@
 package com.fishep.fusion.mic.sso.application.cqe;
 
 import com.fishep.fusion.mic.sso.domain.entity.User;
-import com.fishep.fusion.mic.sso.domain.factory.AppFactory;
 import com.fishep.fusion.mic.sso.domain.service.AuthPairService;
 import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
-import com.fishep.fusion.mic.sso.domain.type.App;
 import lombok.Data;
 
 /**
@@ -15,15 +13,9 @@ import lombok.Data;
 @Data
 public abstract class RegisterCmd {
 
-    public String app;
-
     public String identifier;
 
     public String password;
-
-    public App getApp() {
-        return AppFactory.create(app);
-    }
 
     public abstract User getUser(AuthPairService authPairService, CertificateHashService certificateHashService);
 

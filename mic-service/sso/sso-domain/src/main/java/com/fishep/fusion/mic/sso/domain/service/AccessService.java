@@ -19,4 +19,12 @@ public interface AccessService {
      */
     boolean canAccess(User user, App app);
 
+    /**
+     * 控制不同的人对不同的系统的访问,断言可以访问，如果不能访问则抛异常
+     *
+     * @param user
+     * @param app
+     */
+    void assertCanAccess(User user, App app);
+
 }

@@ -3,7 +3,6 @@ package com.fishep.fusion.mic.sso.domain.service.impl;
 import com.fishep.fusion.mic.ddd.domain.service.EntityPolicy;
 import com.fishep.fusion.mic.ddd.domain.service.EntityPolicyManager;
 import com.fishep.fusion.mic.sso.domain.entity.User;
-import com.fishep.fusion.mic.sso.domain.service.CheckService;
 import com.fishep.fusion.mic.sso.domain.service.VerifyService;
 import com.fishep.fusion.mic.sso.domain.type.*;
 
@@ -25,10 +24,7 @@ public class VerifyServiceImpl implements VerifyService {
 
     @Override
     public boolean verify(User user, Supplier<Certificate> supplier) {
-        VerifyManager manager = new VerifyManager(() -> {
-            CheckService checkService = new CheckServiceImpl();
-            return checkService.check(user, supplier.get());
-        });
+        VerifyManager manager = new VerifyManager(supplier);
 
         if (user == null || user.getIdentifier() == null) {
             return Boolean.FALSE;
@@ -39,10 +35,10 @@ public class VerifyServiceImpl implements VerifyService {
     }
 
     public class VerifyManager extends EntityPolicyManager<User, Boolean, EntityPolicy<User, Boolean>> {
-        public VerifyManager(Supplier<Boolean> checkServiceCallback) {
+        public VerifyManager(Supplier<Certificate> certificateSupplier) {
             add(new UserNameVerifyPolicy());
-            add(new EmailVerifyPolicy(checkServiceCallback));
-            add(new PhoneNumberVerifyPolicy(checkServiceCallback));
+            add(new EmailVerifyPolicy(certificateSupplier));
+            add(new PhoneNumberVerifyPolicy(certificateSupplier));
         }
     }
 
@@ -59,10 +55,10 @@ public class VerifyServiceImpl implements VerifyService {
     }
 
     public class EmailVerifyPolicy implements EntityPolicy<User, Boolean> {
-        private Supplier<Boolean> checkServiceCallback;
+        private Supplier<Certificate> certificateSupplier;
 
-        public EmailVerifyPolicy(Supplier<Boolean> checkServiceCallback) {
-            this.checkServiceCallback = checkServiceCallback;
+        public EmailVerifyPolicy(Supplier<Certificate> certificateSupplier) {
+            this.certificateSupplier = certificateSupplier;
         }
 
         @Override
@@ -72,15 +68,15 @@ public class VerifyServiceImpl implements VerifyService {
 
         @Override
         public Boolean apply(User user) {
-            return checkServiceCallback.get();
+            return user.getCertificate().equals(certificateSupplier.get());
         }
     }
 
     public class PhoneNumberVerifyPolicy implements EntityPolicy<User, Boolean> {
-        private Supplier<Boolean> checkServiceCallback;
+        private Supplier<Certificate> certificateSupplier;
 
-        public PhoneNumberVerifyPolicy(Supplier<Boolean> checkServiceCallback) {
-            this.checkServiceCallback = checkServiceCallback;
+        public PhoneNumberVerifyPolicy(Supplier<Certificate> certificateSupplier) {
+            this.certificateSupplier = certificateSupplier;
         }
 
         @Override
@@ -90,7 +86,7 @@ public class VerifyServiceImpl implements VerifyService {
 
         @Override
         public Boolean apply(User user) {
-            return checkServiceCallback.get();
+            return user.getCertificate().equals(certificateSupplier.get());
         }
     }
 

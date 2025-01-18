@@ -11,8 +11,14 @@ import com.fishep.fusion.mic.sso.domain.type.Identifier;
  **/
 public interface CertificateRepository {
 
+//    <C extends Certificate> Certificate find(User user, Class<C> certificateClass);
+
     <U extends User, C extends Certificate> Certificate find(Class<U> userClass, Identifier identifier, Class<C> certificateClass);
 
+    <U extends User, C extends Certificate> Certificate findOrException(Class<U> userClass, Identifier identifier, Class<C> certificateClass);
+
     <U extends User> boolean save(Class<U> userClass, Identifier identifier, Certificate certificate);
+
+    <U extends User> void saveOrException(Class<U> userClass, Identifier identifier, Certificate certificate);
 
 }

@@ -58,4 +58,10 @@ public abstract class Certificate {
         return false;
     }
 
+    public void assertEquals(Object obj) {
+        if (!equals(obj)) {
+            throw new ValidateException("Certificate assertEquals Fail");
+        }
+    }
+
 }
