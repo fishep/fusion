@@ -1,0 +1,16 @@
+description = "sso 服务启动器"
+
+dependencies {
+    implementation(project(":mic-service:sso:sso-domain"))
+    implementation(project(":mic-service:sso:sso-application"))
+    implementation(project(":mic-service:sso:sso-infrastructure"))
+    implementation(project(":mic-service:sso:sso-interface"))
+    implementation(project(":mic-service:sso:sso-interface-web"))
+//    implementation(project(":mic-service:sso:sso-interface-webflux"))
+    implementation(project(":mic-service:sso:sso-interface-dubbo"))
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.apache.dubbo:dubbo-spring-boot-starter'
+//    implementation 'org.apache.dubbo:dubbo-registry-nacos'
+}

@@ -5,7 +5,8 @@ ext {
 
     version = [
             "hutool": "5.8.16",
-            "flink" : "1.19.0"
+            "flink" : "1.19.0",
+            "dubbo" : "3.2.11"
     ]
     dependencies = [
             "hutool"                    : "cn.hutool:hutool-all:${version.hutool}",
@@ -18,6 +19,8 @@ ext {
             "flink-runtime-web"         : "org.apache.flink:flink-runtime-web:${version.flink}",
             "flink-cep"                 : "org.apache.flink:flink-cep:${version.flink}",
             "flink-table-runtime"       : "org.apache.flink:flink-table-runtime:${version.flink}",
-            "flink-table-planner-loader": "org.apache.flink:flink-table-planner-loader:${version.flink}"
+            "flink-table-planner-loader": "org.apache.flink:flink-table-planner-loader:${version.flink}",
+            "dubbo"                     : "org.apache.dubbo:dubbo-spring-boot-starter:${version.dubbo}",
+            "dubbo-registry-nacos"      : "org.apache.dubbo:dubbo-registry-nacos:${version.dubbo}"
     ]
 }

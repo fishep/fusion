@@ -1,0 +1,10 @@
+description = "sso接口层 - web客户端实现，客户端依赖包"
+
+dependencies {
+    implementation(project(":mic-service:sso:sso-interface"))
+
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+
+}

@@ -32,7 +32,8 @@ ext {
     infrastructures = subprojects.findAll { it.name.endsWith("-infrastructure") }
     interfaces = subprojects.findAll { it.name.endsWith("-interface") }
 
-    all = subprojects.findAll { it.name.endsWith("-application") || it.name.endsWith("-domain") || it.name.endsWith("-infrastructure") || it.name.endsWith("-interface") }
+//    ddd = subprojects.findAll { it.name.endsWith("-application") || it.name.endsWith("-domain") || it.name.endsWith("-infrastructure") || it.name.endsWith("-interface") }
+    all = subprojects.findAll { it.name.contains("-") }
 }
 
 configure(all) {

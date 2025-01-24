@@ -1,0 +1,7 @@
+description = "sso接口层 - dubbo客户端实现，客户端依赖包"
+
+dependencies {
+    implementation(project(":mic-service:sso:sso-interface"))
+
+    implementation 'org.apache.dubbo:dubbo-spring-boot-starter'
+}

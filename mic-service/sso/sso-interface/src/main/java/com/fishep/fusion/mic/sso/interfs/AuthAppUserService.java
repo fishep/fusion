@@ -1,4 +1,4 @@
-package com.fishep.fusion.mic.sso.interfs.rpc.service.auth;
+package com.fishep.fusion.mic.sso.interfs;
 
 import com.fishep.fusion.mic.sso.interfs.req.auth.ActivateReq;
 import com.fishep.fusion.mic.sso.interfs.req.auth.LoginReq;
@@ -14,7 +14,7 @@ import com.fishep.fusion.mic.sso.interfs.res.auth.SendVerificationCodeRes;
  * @Date 2025/1/23 10:50
  * @Desc
  **/
-public interface AppUserService {
+public interface AuthAppUserService {
 
     RegisterRes register(RegisterReq req);
 
