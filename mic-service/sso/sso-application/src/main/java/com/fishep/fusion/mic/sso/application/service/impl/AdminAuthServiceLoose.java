@@ -1,7 +1,6 @@
 package com.fishep.fusion.mic.sso.application.service.impl;
 
 import com.fishep.fusion.mic.ddd.domain.exception.ValidateException;
-import com.fishep.fusion.mic.sso.application.cqe.ActivateCmd;
 import com.fishep.fusion.mic.sso.application.cqe.LoginCmd;
 import com.fishep.fusion.mic.sso.application.cqe.RegisterAdminCmd;
 import com.fishep.fusion.mic.sso.application.cqe.RegisterCmd;
@@ -14,11 +13,11 @@ import com.fishep.fusion.mic.sso.domain.type.Password;
  * @Date 2025/1/3 16:37
  * @Desc 后台管理员认证流程
  * 后台管理员添加用户，系统发送邮件给用户（随机密码），用户登录
- * 用户注册->发送密码->登录
+ * 用户注册(管理员添加用户)->发送密码->登录
  **/
-public class AdminAuthService extends AbstractAuthServiceLoose {
+public class AdminAuthServiceLoose extends AbstractAuthServiceLoose {
 
-    public AdminAuthService(Context context) {
+    public AdminAuthServiceLoose(Context context) {
         super(context);
     }
 
@@ -39,11 +38,6 @@ public class AdminAuthService extends AbstractAuthServiceLoose {
         });
 
         generateRandomCertificateThenSend(user, Password.class);
-    }
-
-    @Override
-    public void activate(ActivateCmd activateCmd) {
-
     }
 
     @Override

@@ -22,11 +22,11 @@ public abstract class ActivateCmd {
 
     public abstract <T extends User> Class<T> getUserType();
 
-    public Identifier getIdentifierInstance() {
+    public Identifier getIdentifierEntity() {
         return IdentifierFactory.create(identifier);
     }
 
-    public VerificationCode getVerificationCode(CertificateHashService certificateHashService) {
+    public VerificationCode getVerificationCodeEntity(CertificateHashService certificateHashService) {
         return (VerificationCode) CertificateFactory.create(verificationCode, certificateHashService);
     }
 

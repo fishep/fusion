@@ -1,5 +1,6 @@
 package com.fishep.fusion.mic.sso.application.service.impl;
 
+import com.fishep.fusion.mic.sso.application.cqe.ActivateCmd;
 import com.fishep.fusion.mic.sso.application.dto.TokenDto;
 import com.fishep.fusion.mic.sso.domain.entity.User;
 import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
@@ -52,6 +53,11 @@ public abstract class AbstractAuthServiceStrict extends AbstractAuthService {
 //        颁发token
 
         return null;
+    }
+
+    @Override
+    public void activate(ActivateCmd activateCmd) {
+
     }
 
 }

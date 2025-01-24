@@ -33,7 +33,7 @@ public abstract class AbstractAuthServiceDelay extends AbstractAuthService {
 
         userRepository.saveOrException(user);
 
-        generateRandomCertificateThenSend(user, VerificationCode.class);
+//        generateRandomCertificateThenSend(user, VerificationCode.class);
     }
 
     public void activate(Supplier<User> userSupplier, Function<CertificateHashService, VerificationCode> certificateSupplier) {
