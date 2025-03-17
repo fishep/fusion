@@ -3,4 +3,6 @@ description = "sso基础设施层"
 dependencies {
     api(project(":mic-service:ddd:ddd-infrastructure"))
     api(project(":mic-service:sso:sso-domain"))
+
+//    optional("org.springframework.data:spring-data-redis")
 }
