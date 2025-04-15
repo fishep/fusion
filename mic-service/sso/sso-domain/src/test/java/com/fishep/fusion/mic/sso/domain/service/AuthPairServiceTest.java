@@ -30,7 +30,7 @@ class AuthPairServiceTest {
 
     @Test
     void testAuthPairServiceImpl() {
-        AuthPairService authPairService = new AuthPairServiceImpl();
+        BindService authPairService = new AuthPairServiceImpl();
         canUse(authPairService);
     }
 
@@ -42,7 +42,7 @@ class AuthPairServiceTest {
      * 客户 Customer       邮箱和密码 || 邮箱和验证码 || 手机号和密码 || 手机号和验证码
      * 。。。
      */
-    void canUse(AuthPairService service) {
+    void canUse(BindService service) {
         assertFalse(service.canUse(null, null, null));
         assertFalse(service.canUse(null, userName, password));
         assertFalse(service.canUse(admin, null, password));

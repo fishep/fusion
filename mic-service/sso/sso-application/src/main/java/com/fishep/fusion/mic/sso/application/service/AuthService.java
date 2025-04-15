@@ -1,11 +1,8 @@
 package com.fishep.fusion.mic.sso.application.service;
 
-import com.fishep.fusion.mic.sso.application.cqe.ActivateCmd;
-import com.fishep.fusion.mic.sso.application.cqe.LoginCmd;
-import com.fishep.fusion.mic.sso.application.cqe.RegisterCmd;
-import com.fishep.fusion.mic.sso.application.cqe.SendVerificationCodeCmd;
+import com.fishep.fusion.mic.sso.application.cqe.*;
+import com.fishep.fusion.mic.sso.application.dto.AuthorizationCodeDto;
 import com.fishep.fusion.mic.sso.application.dto.TokenDto;
-import com.fishep.fusion.mic.sso.application.dto.VerificationCodeDto;
 
 /**
  * @Author fly.fei
@@ -14,68 +11,30 @@ import com.fishep.fusion.mic.sso.application.dto.VerificationCodeDto;
  **/
 public interface AuthService {
 
-    void register(RegisterCmd registerCmd);
+    TokenDto register(RegisterCmd cmd);
 
-//    /**
-//     * 注销用户，从系统中删除用户
-//     *
-//     * @param deregisterCmd
-//     */
-//    void deregister(DeregisterCmd deregisterCmd);
+    TokenDto register(RegisterWithAuthorizeCmd cmd);
 
-    /**
-     * 发送验证码
-     *
-     * @param sendVerificationCodeCmd
-     * @return
-     */
-    VerificationCodeDto sendVerificationCode(SendVerificationCodeCmd sendVerificationCodeCmd);
+    TokenDto register(RegisterWithAVCmd cmd);
 
-    /**
-     * 激活用户，验证用户注册的信息的有效性，激活之后才能登录
-     * 例如：通过往用户注册的邮箱发送一封邮件，通过用户点击邮箱里的链接，验证邮箱是用户所拥有的
-     *
-     * @param activateCmd
-     */
-    void activate(ActivateCmd activateCmd);
+    TokenDto register(RegisterWithVerifyCmd cmd);
 
-//    /**
-//     * 钝化用户，使用户不可用，从系统软删除
-//     *
-//     * @param inactivateCmd
-//     */
-//    void inactivate(InactivateCmd inactivateCmd);
+    Boolean registerAndSendActivateCode(RegisterCmd cmd);
 
-    /**
-     * 用户登录，登录成功返回令牌，后续凭此令牌访问系统
-     *
-     * @param loginCmd
-     * @return 成功返回令牌，失败返回null
-     */
-    TokenDto login(LoginCmd loginCmd);
-//
-//    /**
-//     * 用户登出，退出登录，令牌作废
-//     *
-//     * @param logoutCmd
-//     */
-//    void logout(LogoutCmd logoutCmd);
-//
-//
-//    /**
-//     * 颁发令牌，后续可凭此令牌进行验证
-//     *
-//     * @param issueCmd
-//     * @return 颁发成功返回Token，失败返回null
-//     */
-//    TokenDto issue(IssueCmd issueCmd);
-//
-//    /**
-//     * 解析令牌，从令牌中解析出数据，包括用户数据，所属应用，版本号，等等
-//     *
-//     * @param parseCmd
-//     * @return 解析成功返回Token，失败返回null
-//     */
-//    TokenDto parse(ParseCmd parseCmd);
+    Boolean registerAndSendActivateCode(RegisterWithAuthorizeCmd cmd);
+
+    Boolean sendRegisterVerificationCode(SendVerificationCodeCmd cmd);
+
+    AuthorizationCodeDto generateAuthorizationCode(GenerateAuthorizationCodeCmd cmd);
+
+    Boolean sendActivateCode(SendActivateCodeCmd cmd);
+
+    Boolean activate(ActivateCmd cmd);
+
+    TokenDto login(LoginCmd cmd);
+
+    TokenDto loginAfterActivate(LoginCmd cmd);
+
+    Boolean sendLoginVerificationCode(SendVerificationCodeCmd cmd);
 
 }

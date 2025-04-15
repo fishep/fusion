@@ -5,5 +5,8 @@ package com.fishep.fusion.mic.sso.interfs.res.auth;
  * @Date 2025/1/20 16:44
  * @Desc
  **/
-public abstract class ActivateRes {
+public class ActivateRes {
+
+    public Boolean result;
+
 }

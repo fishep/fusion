@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.fishep.fusion.mic.ddd.domain.exception.ValidateException;
 import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @Author fly.fei

@@ -1,9 +1,7 @@
 package com.fishep.fusion.mic.sso.application.cqe;
 
 import com.fishep.fusion.mic.sso.domain.entity.User;
-import com.fishep.fusion.mic.sso.domain.factory.CertificateFactory;
-import com.fishep.fusion.mic.sso.domain.factory.IdentifierFactory;
-import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
+import com.fishep.fusion.mic.sso.domain.type.App;
 import com.fishep.fusion.mic.sso.domain.type.Certificate;
 import com.fishep.fusion.mic.sso.domain.type.Identifier;
 import lombok.Data;
@@ -14,20 +12,14 @@ import lombok.Data;
  * @Desc
  **/
 @Data
-public abstract class LoginCmd {
+public class LoginCmd<U extends User> {
 
-    public String identifier;
+    public App app;
 
-    public String certificate;
+    public Class<U> user;
 
-    public abstract <T extends User> Class<T> getUserType();
+    public Identifier identifier;
 
-    public Identifier getIdentifierEntity() {
-        return IdentifierFactory.create(identifier);
-    }
-
-    public Certificate getCertificateEntity(CertificateHashService certificateHashService) {
-        return CertificateFactory.create(certificate, certificateHashService);
-    }
+    public Certificate certificate;
 
 }

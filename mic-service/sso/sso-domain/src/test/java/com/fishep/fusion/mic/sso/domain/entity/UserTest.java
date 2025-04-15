@@ -1,7 +1,7 @@
 package com.fishep.fusion.mic.sso.domain.entity;
 
 import com.fishep.fusion.mic.ddd.domain.exception.ValidateException;
-import com.fishep.fusion.mic.sso.domain.service.AuthPairService;
+import com.fishep.fusion.mic.sso.domain.service.BindService;
 import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
 import com.fishep.fusion.mic.sso.domain.service.impl.AuthPairServiceImpl;
 import com.fishep.fusion.mic.sso.domain.service.impl.CertificateHashServiceImpl;
@@ -25,7 +25,7 @@ class UserTest {
     private static Certificate password = new Password("12345678", hashService);
     private static Certificate verificationCode = new VerificationCode("123456", hashService);
 
-    private static AuthPairService authPairService = new AuthPairServiceImpl();
+    private static BindService authPairService = new AuthPairServiceImpl();
 
     @Test
     void create() {

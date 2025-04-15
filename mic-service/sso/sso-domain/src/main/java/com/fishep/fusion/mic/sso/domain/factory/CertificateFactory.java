@@ -3,9 +3,8 @@ package com.fishep.fusion.mic.sso.domain.factory;
 import cn.hutool.core.util.StrUtil;
 import com.fishep.fusion.mic.ddd.domain.exception.ValidateException;
 import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
-import com.fishep.fusion.mic.sso.domain.type.Certificate;
-import com.fishep.fusion.mic.sso.domain.type.Password;
-import com.fishep.fusion.mic.sso.domain.type.VerificationCode;
+import com.fishep.fusion.mic.sso.domain.service.impl.CertificateHashServiceImpl;
+import com.fishep.fusion.mic.sso.domain.type.*;
 
 /**
  * @Author fly.fei
@@ -14,39 +13,49 @@ import com.fishep.fusion.mic.sso.domain.type.VerificationCode;
  **/
 public class CertificateFactory {
 
-    private CertificateHashService hashService;
+    private static CertificateHashService hashService = new CertificateHashServiceImpl();
 
-    public CertificateFactory(CertificateHashService hashService) {
-        this.hashService = hashService;
-    }
-
-    public Certificate create(String plaintext) {
-        return create(plaintext, hashService);
-    }
-
-    public VerificationCode generateVerificationCode() {
-        String plaintext = "123456";
-        return (VerificationCode) create(plaintext, hashService);
-    }
-
-    public Password generatePassword() {
-        String plaintext = "12345678";
-        return (Password) create(plaintext, hashService);
-    }
-
-    public Certificate generate(Class<? extends Certificate> clazz) {
+    public static Certificate generate(Class<? extends Certificate> clazz) {
         if (Password.class.equals(clazz)) {
-            return generatePassword();
+            return new Password("password", hashService);
         }
 
         if (VerificationCode.class.equals(clazz)) {
-            return generateVerificationCode();
+            return new VerificationCode("123456", hashService);
+        }
+
+        if (ActivateCode.class.equals(clazz)) {
+            return new ActivateCode("123456", hashService);
+        }
+
+        if (AuthorizationCode.class.equals(clazz)) {
+            return new AuthorizationCode("12345678abcdefgh12345678abcdefgh", hashService);
         }
 
         throw new ValidateException("Unsupported generate certificate types, certificate: {}", clazz.getName());
     }
 
-    public static Certificate create(String plaintext, CertificateHashService hashService) {
+    public static Certificate create(String plaintext, Class<? extends Certificate> clazz) {
+        if (Password.class.equals(clazz)) {
+            return new Password(plaintext, hashService);
+        }
+
+        if (VerificationCode.class.equals(clazz)) {
+            return new VerificationCode(plaintext, hashService);
+        }
+
+        if (ActivateCode.class.equals(clazz)) {
+            return new ActivateCode(plaintext, hashService);
+        }
+
+        if (AuthorizationCode.class.equals(clazz)) {
+            return new AuthorizationCode(plaintext, hashService);
+        }
+
+        throw new ValidateException("Unsupported certificate types, certificate: {}", plaintext);
+    }
+
+    public static Certificate createLoginCertificate(String plaintext) {
         if (!StrUtil.isBlank(plaintext)) {
             if (plaintext.length() == 6) {
                 return new VerificationCode(plaintext, hashService);
@@ -59,5 +68,4 @@ public class CertificateFactory {
 
         throw new ValidateException("Unsupported certificate types, certificate: {}", plaintext);
     }
-
 }

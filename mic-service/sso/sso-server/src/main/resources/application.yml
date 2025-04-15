@@ -1,0 +1,5 @@
+server:
+  port: ${PORT:11100}
+spring:
+  application:
+    name: sso-server

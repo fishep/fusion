@@ -1,8 +1,8 @@
 package com.fishep.fusion.mic.sso.application.cqe;
 
-import com.fishep.fusion.mic.sso.domain.entity.User;
-import com.fishep.fusion.mic.sso.domain.service.AuthPairService;
-import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
+import com.fishep.fusion.mic.sso.domain.entity.Account;
+import com.fishep.fusion.mic.sso.domain.type.App;
+import com.fishep.fusion.mic.sso.domain.type.Password;
 import lombok.Data;
 
 /**
@@ -11,12 +11,12 @@ import lombok.Data;
  * @Desc 注册命令，将标识符（用户名，邮箱，电话号码）和密码注册到系统
  **/
 @Data
-public abstract class RegisterCmd {
+public class RegisterCmd {
 
-    public String identifier;
+    public App app;
 
-    public String password;
+    public Account account;
 
-    public abstract User getUser(AuthPairService authPairService, CertificateHashService certificateHashService);
+    public Password password;
 
 }

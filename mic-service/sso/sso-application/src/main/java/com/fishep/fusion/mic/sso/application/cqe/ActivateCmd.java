@@ -1,11 +1,9 @@
 package com.fishep.fusion.mic.sso.application.cqe;
 
 import com.fishep.fusion.mic.sso.domain.entity.User;
-import com.fishep.fusion.mic.sso.domain.factory.CertificateFactory;
-import com.fishep.fusion.mic.sso.domain.factory.IdentifierFactory;
-import com.fishep.fusion.mic.sso.domain.service.CertificateHashService;
+import com.fishep.fusion.mic.sso.domain.type.ActivateCode;
+import com.fishep.fusion.mic.sso.domain.type.App;
 import com.fishep.fusion.mic.sso.domain.type.Identifier;
-import com.fishep.fusion.mic.sso.domain.type.VerificationCode;
 import lombok.Data;
 
 /**
@@ -14,20 +12,14 @@ import lombok.Data;
  * @Desc
  **/
 @Data
-public abstract class ActivateCmd {
+public class ActivateCmd<U extends User> {
 
-    public String identifier;
+    public App app;
 
-    public String verificationCode;
+    public Class<U> user;
 
-    public abstract <T extends User> Class<T> getUserType();
+    public Identifier identifier;
 
-    public Identifier getIdentifierEntity() {
-        return IdentifierFactory.create(identifier);
-    }
-
-    public VerificationCode getVerificationCodeEntity(CertificateHashService certificateHashService) {
-        return (VerificationCode) CertificateFactory.create(verificationCode, certificateHashService);
-    }
+    public ActivateCode activateCode;
 
 }

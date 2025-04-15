@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @Desc
  **/
 class VerifyServiceTest {
-    private static AuthPairService authPairService = new AuthPairServiceImpl();
+    private static BindService authPairService = new AuthPairServiceImpl();
     private static CertificateHashService hashService = new CertificateHashServiceImpl();
 
     private static User user0; // 没有标识

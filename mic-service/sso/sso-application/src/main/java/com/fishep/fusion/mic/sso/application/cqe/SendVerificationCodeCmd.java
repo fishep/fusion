@@ -1,7 +1,7 @@
 package com.fishep.fusion.mic.sso.application.cqe;
 
-import com.fishep.fusion.mic.sso.domain.entity.User;
-import com.fishep.fusion.mic.sso.domain.factory.IdentifierFactory;
+import com.fishep.fusion.mic.sso.domain.entity.Account;
+import com.fishep.fusion.mic.sso.domain.type.App;
 import com.fishep.fusion.mic.sso.domain.type.Identifier;
 import lombok.Data;
 
@@ -11,14 +11,12 @@ import lombok.Data;
  * @Desc
  **/
 @Data
-public abstract class SendVerificationCodeCmd {
+public class SendVerificationCodeCmd<T extends Account> {
 
-    public String identifier;
+    public App app;
 
-    public abstract <T extends User> Class<T> getUserType();
+    public Class<T> accountClass;
 
-    public Identifier getIdentifierEntity() {
-        return IdentifierFactory.create(identifier);
-    }
+    public Identifier identifier;
 
 }

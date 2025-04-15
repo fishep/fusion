@@ -10,12 +10,14 @@ import com.fishep.fusion.mic.sso.domain.service.AccessService;
 import com.fishep.fusion.mic.sso.domain.type.App;
 import com.fishep.fusion.mic.sso.domain.type.Back;
 import com.fishep.fusion.mic.sso.domain.type.Mall;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author fly.fei
  * @Date 2024/12/28 10:17
  * @Desc
  **/
+@Component
 public class AccessServiceImpl implements AccessService {
 
     private AccessManager manager = new AccessManager();
